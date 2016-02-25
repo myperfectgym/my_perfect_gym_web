@@ -11,15 +11,15 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'homeUrl' => '/admin',
     'modules' => [
         'permit' => [
             'class' => 'developeruz\db_rbac\Yii2DbRbac',
             'params' => [
-                'userClass' => 'common\models\User'
-            ]
+                'userClass' => 'app\models\User'
+            ],
         ],
     ],
-    'homeUrl' => '/admin',
     'components' => [
         'request' => [
             'baseUrl'  => '/admin',
@@ -48,6 +48,38 @@ return [
             ],
         ],
 
+    ],
+    'as AccessBehavior' => [
+        'class' => 'common\components\db_rbac\AccessBehavior',
+        'rules' =>[
+            'site' =>
+                [
+                    [
+                        'actions' => ['login'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+            'debug/default' =>
+                [
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                    ],
+                ],
+            'permit/access' =>
+                [
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                ],
+        ]
     ],
     'params' => $params,
 ];
