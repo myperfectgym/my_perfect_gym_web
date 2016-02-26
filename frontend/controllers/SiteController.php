@@ -7,17 +7,23 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\RegistrationForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
+
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+
+    public function init() {
+        $this->layout = (Yii::$app->user->isGuest) ? "main_guest" : "main";
+    }
+
     /**
      * @inheritdoc
      */
@@ -31,6 +37,21 @@ class SiteController extends Controller
                 ],
             ],
         ];
+    }
+
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+
+            if ($action->id == 'error') {
+                $this->layout = 'error';
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -59,6 +80,24 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+    public function actionRegistration()
+    {
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new RegistrationForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
+            $model->login();
+            return $this->goHome();
+        }
+
+        return $this->render('registration', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Logs in a user.
      *
@@ -72,7 +111,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         } else {
             return $this->render('login', [
                 'model' => $model,

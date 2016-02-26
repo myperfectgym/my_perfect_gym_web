@@ -9,6 +9,8 @@ use yii\helpers\Html;
 
 $this->title = $name;
 ?>
+
+<?= $message?>
 <div class="account-pages"></div>
 <div class="clearfix"></div>
 

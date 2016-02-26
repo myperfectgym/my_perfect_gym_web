@@ -41,43 +41,7 @@ $config = [
         ],
 
     ],
-    'as AccessBehavior' => [
-        'class' => 'common\components\db_rbac\AccessBehavior',
-        'rules' =>[
-            'site' =>
-                [
-                    [
-                        'actions' => ['login', 'logout'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['user'],
-                    ],
-                ],
-            'debug/default' =>
-                [
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                    ],
-                ],
-            'permit/access' =>
-                [
-                    [
-                        'actions' => [],
-                        'allow' => true,
-                        'roles' => ['admin'],
-                    ],
-                ],
-        ]
-    ],
+    'as AccessBehavior' => require(__DIR__ . '/access/rbac.php'),
     'params' => $params,
 ];
 
