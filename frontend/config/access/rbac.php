@@ -33,6 +33,19 @@ return [
                     'roles' => ['user'],
                 ],
             ],
+        'user' =>
+            [
+                [
+                    'actions' => ['update'],
+                    'allow' => true,
+                    'roles' => ['user'],
+                ],
+                [
+                    'actions' => [],
+                    'allow' => true,
+                    'roles' => ['admin'],
+                ]
+            ],
         'debug/default' =>
             [
                 [
@@ -40,13 +53,13 @@ return [
                     'allow' => true,
                 ],
             ],
-        'permit/access' =>
+        'gii' =>
             [
                 [
                     'actions' => [],
                     'allow' => true,
-                    'roles' => ['admin'],
-                ],
+                    'roles' => ['admin']
+                ]
             ],
     ]
 ];

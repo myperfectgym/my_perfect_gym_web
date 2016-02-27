@@ -1,3 +1,6 @@
+<?
+use yii\helpers\Html;
+?>
 <!-- Top Bar Start -->
 <div class="topbar">
 
@@ -142,8 +145,8 @@
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true"><img src="/images/noavatar.png" alt="user-img" class="img-circle"> </a>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:void(0)"><i class="ti-user m-r-5"></i> Profile</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
+                            <li><?= Html::a(Yii::t('app', 'Profile'), ['user/view', 'id' => Yii::$app->user->identity->id])?>
+                              <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
                             <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
                             <li><a href="/site/logout"><i class="ti-power-off m-r-5"></i> <?= Yii::t('app', 'Logout')?></a></li>
                         </ul>
