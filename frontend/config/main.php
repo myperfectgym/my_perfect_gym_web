@@ -41,7 +41,7 @@ $config = [
         ],
 
     ],
-    'as AccessBehavior' => require(__DIR__ . '/access/rbac.php'),
+    //'as AccessBehavior' => require(__DIR__ . '/access/rbac.php'),
     'params' => $params,
 ];
 

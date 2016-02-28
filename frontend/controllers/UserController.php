@@ -2,12 +2,15 @@
 
 namespace frontend\controllers;
 
+use common\models\Files;
+use frontend\models\UserForm;
 use Yii;
 use common\models\User;
-use yii\data\ActiveDataProvider;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -48,8 +51,30 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                if (!$model->save()) {
+                    throw new Exception();
+                }
+
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if ($model->getImageFile()) {
+                    $file = $model->getImageFile();
+                } else {
+                    $file = new Files();
+                }
+
+                $file->attachModel($model, $model->imageFile);
+
+                $transaction->commit();
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            } catch (Exception $ex) {
+
+                $transaction->rollBack();
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -79,7 +104,7 @@ class UserController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = UserForm::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

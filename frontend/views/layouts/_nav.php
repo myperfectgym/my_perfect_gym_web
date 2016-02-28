@@ -1,5 +1,7 @@
 <?
 use yii\helpers\Html;
+use common\models\Files;
+use frontend\models\UserForm;
 ?>
 <!-- Top Bar Start -->
 <div class="topbar">
@@ -143,12 +145,26 @@ use yii\helpers\Html;
                         <a href="#" class="right-bar-toggle waves-effect"><i class="icon-settings"></i></a>
                     </li>
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true"><img src="/images/noavatar.png" alt="user-img" class="img-circle"> </a>
+                        <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true">
+                            <?
+                            $avatar = Files::find()
+                                ->where(
+                                    [
+                                        'model_id' => Yii::$app->user->identity->id,
+                                        'modelname' => UserForm::className(),
+                                    ]
+                                )
+                                ->one();
+                            if ($avatar): ?>
+                                <img src="<?= $avatar->path?>" alt="user-img" class="img-circle">
+                            <? else: ?>
+                                <img src="/images/noavatar.png" alt="user-img" class="img-circle">
+                            <? endif ?>
+                        </a>
                         <ul class="dropdown-menu">
                             <li><?= Html::a(Yii::t('app', 'Profile'), ['user/view', 'id' => Yii::$app->user->identity->id])?>
-                              <li><a href="javascript:void(0)"><i class="ti-settings m-r-5"></i> Settings</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-lock m-r-5"></i> Lock screen</a></li>
-                            <li><a href="/site/logout"><i class="ti-power-off m-r-5"></i> <?= Yii::t('app', 'Logout')?></a></li>
+                            <li><?= Html::a(Yii::t('app', 'Settings'), ['user/update', 'id' => Yii::$app->user->identity->id])?></li>
+                            <li><?= Html::a(Yii::t('app', 'Logout'), ['site/logout', 'id' => Yii::$app->user->identity->id])?></li>
                         </ul>
                     </li>
                 </ul>
