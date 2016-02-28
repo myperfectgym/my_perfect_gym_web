@@ -138,12 +138,6 @@ use frontend\models\UserForm;
                             </li>
                         </ul>
                     </li>
-                    <li class="hidden-xs">
-                        <a href="#" id="btn-fullscreen" class="waves-effect"><i class="icon-size-fullscreen"></i></a>
-                    </li>
-                    <li class="hidden-xs">
-                        <a href="#" class="right-bar-toggle waves-effect"><i class="icon-settings"></i></a>
-                    </li>
                     <li class="dropdown">
                         <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true">
                             <?
