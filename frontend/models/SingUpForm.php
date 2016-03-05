@@ -4,7 +4,7 @@ namespace frontend\models;
 use common\models\User;
 use Yii;
 
-class RegistrationForm extends User
+class SingUpForm extends User
 {
     public $password_repeat;
     public $password;
@@ -25,6 +25,8 @@ class RegistrationForm extends User
     {
         return [
             'password_repeat' => Yii::t('app', 'Password repeat'),
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
         ];
     }
 

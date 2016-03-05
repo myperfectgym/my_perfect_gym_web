@@ -1,10 +1,13 @@
 <?
 return [
     'Logout' => 'Выйти',
+    'Login' => 'Войти',
     'Registration' => 'Регистрация',
     'Password repeat' => 'Повторите пароль',
+    'Password' => 'Пароль',
     'A user with this name already exists' => 'Пользователь с таким именем уже существует',
     'A user already exists with this email address' => 'Пользователь уже существует с таким адресом электронной почты',
+    'Username' => 'Имя пользователя',
     'Profile' => 'Профиль',
     'Settings' => 'Настройки',
     'Personal Information' => 'Персональные данные',
@@ -13,4 +16,11 @@ return [
     'Email' => 'Email',
     'Biography' => 'О себе',
     'Skills' => 'Навыки',
+    'Forgot your password?' => 'Забыли свой пароль?',
+    'Don\'t have an account?' => 'У Вас нет аккаунта?',
+    'Already have account?' => 'У Вас уже есть аккаунт?',
+    'Sing up' => 'Зарегестрироваться',
+    'Sing in' => 'Войти',
+    'My Perfect Gim' => 'My Perfect Gim',
+    'Remember me' => 'Запомнить',
 ];

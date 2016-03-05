@@ -32,6 +32,7 @@ AppAsset::register($this);
 <div id="wrapper" class="right-bar-enabled forced">
 
     <?= $this->render('_nav')?>
+
     <div class="content-page">
         <!-- Start content -->
         <div class="content">

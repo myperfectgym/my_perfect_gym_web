@@ -5,9 +5,7 @@ use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
-use frontend\models\RegistrationForm;
+use frontend\models\SingUpForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -80,20 +78,20 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    public function actionRegistration()
+    public function actionSingUp()
     {
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
-        $model = new RegistrationForm();
+        $model = new SingUpForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->save()) {
             $model->login();
             return $this->goHome();
         }
 
-        return $this->render('registration', [
+        return $this->render('sing-up', [
             'model' => $model,
         ]);
     }
@@ -129,23 +127,6 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-
-
-    public function actionSignup()
-    {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
-            }
-        }
-
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
     }
 
     /**

@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class=" card-box">
     <div class="panel-heading">
-        <h3 class="text-center"> Sign In to <strong class="text-custom">UBold</strong> </h3>
+        <h3 class="text-center"> <?= Yii::t('app', 'Registration')?> </h3>
     </div>
 
 
@@ -41,19 +41,17 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 
-        <div class="form-group m-t-30 m-b-0">
-            <div class="col-sm-12">
-                <a href="page-recoverpw.html" class="text-dark"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
-            </div>
-        </div>
-
         <?php ActiveForm::end(); ?>
 
     </div>
 </div>
 <div class="row">
     <div class="col-sm-12 text-center">
-        <p>Don't have an account? <a href="page-register.html" class="text-primary m-l-5"><b>Sign Up</b></a></p>
-
+        <p>
+            <?= Yii::t('app', 'Already have account?')?>
+            <a href="/site/login" class="text-primary m-l-5">
+                <b><?= Yii::t('app', 'Sing in')?></b>
+            </a>
+        </p>
     </div>
 </div>
