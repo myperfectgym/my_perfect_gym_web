@@ -36,12 +36,11 @@ AppAsset::register($this);
     <div class="content-page">
         <!-- Start content -->
         <div class="content">
-<!--            <div class="container">-->
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
+<!--                --><?//= Breadcrumbs::widget([
+//                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+//                ]) ?>
                 <?= $content ?>
-<!--            </div>-->
+
         </div>
     </div>
 </div>

@@ -21,8 +21,19 @@ use frontend\models\UserForm;
             <div class="">
 
                 <ul class="nav navbar-nav main-menu">
-                    <li ><a href="#">Тренеровки</a></li>
-                    <li><a href="#">Диеты</a></li>
+                    <li class="dropdown" >
+                        <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true"><?= Yii::t('app', 'Trainings')?></a>
+                        <ul class="dropdown-menu">
+                            <li><?= Html::a(Yii::t('app', 'List trainings'), ['trainings/'])?>
+                            <li><?= Html::a(Yii::t('app', 'Create training'), ['trainings/create'])?></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" >
+                        <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true"><?= Yii::t('app', 'Exercise')?></a>
+                        <ul class="dropdown-menu">
+                            <li><?= Html::a(Yii::t('app', 'List exercise'), ['exercise/'])?>
+                        </ul>
+                    </li>
                     <li><a href="#">Диеты</a></li>
                     <li><a href="#">Диеты</a></li>
                     <li><a href="#">Диеты</a></li>
@@ -52,7 +63,7 @@ use frontend\models\UserForm;
                             <? endif ?>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><?= Html::a(Yii::t('app', 'Profile'), ['user/view', 'id' => Yii::$app->user->identity->id])?>
+                            <li><?= Html::a(Yii::t('app', 'Profile'), ['user/view', 'id' => Yii::$app->user->identity->id])?></li>
                             <li><?= Html::a(Yii::t('app', 'Settings'), ['user/update', 'id' => Yii::$app->user->identity->id])?></li>
                             <li><?= Html::a(Yii::t('app', 'Logout'), ['site/logout', 'id' => Yii::$app->user->identity->id])?></li>
                         </ul>

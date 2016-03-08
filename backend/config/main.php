@@ -64,6 +64,22 @@ return [
                         'roles' => ['admin'],
                     ],
                 ],
+            'exercise' =>
+                [
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['admin']
+                    ],
+                ],
+            'group-exercise' =>
+                [
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['admin']
+                    ],
+                ],
             'debug/default' =>
                 [
                     [
