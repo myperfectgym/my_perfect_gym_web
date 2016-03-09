@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\form\ExerciseForm;
 use Yii;
 use common\models\Exercise;
 use yii\web\Controller;
@@ -59,7 +60,7 @@ class ExerciseController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Exercise();
+        $model = new ExerciseForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -95,11 +96,11 @@ class ExerciseController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
+        $id = Yii::$app->request->post('id');
 
-        return $this->redirect(['index']);
+        $this->findModel($id)->delete();
     }
 
     /**
@@ -111,7 +112,7 @@ class ExerciseController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Exercise::findOne($id)) !== null) {
+        if (($model = ExerciseForm::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

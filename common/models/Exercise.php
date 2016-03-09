@@ -32,7 +32,8 @@ class Exercise extends \yii\db\ActiveRecord
         return [
             [['description'], 'string'],
             [['name', 'link_to_youtoub'], 'string', 'max' => 255],
-            [['group_id'], 'integer']
+            [['group_id'], 'integer'],
+            [['chest', 'back', 'hips'], 'integer', 'max' => 100]
         ];
     }
 
@@ -43,9 +44,11 @@ class Exercise extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'link_to_youtoub' => 'Link To Youtoub',
+            'name' => Yii::t('app', 'Name'),
+            'description' => Yii::t('app', 'Description'),
+            'chest' => Yii::t('app', 'Chest'),
+            'back' => Yii::t('app', 'Back'),
+            'hips' => Yii::t('app', 'Hips'),
         ];
     }
 

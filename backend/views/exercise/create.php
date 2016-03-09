@@ -10,12 +10,17 @@ $this->title = 'Create Exercise';
 $this->params['breadcrumbs'][] = ['label' => 'Exercises', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="exercise-create">
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card-box">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+            <h4 class="m-t-0 header-title"><b><?= Html::encode($this->title) ?></b></h4>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+            <?= $this->render('_form', [
+                'model' => $model,
+            ]) ?>
 
+        </div>
+    </div>
 </div>
+

@@ -18,6 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h4 class="page-title"><?= Html::encode($this->title) ?></h4>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card-box">
             <div class="row">
                 <div class="col-sm12">
                     <?= Html::a(Yii::t('app', 'Create Exercise'), ['create'], ['class' => 'btn btn-success btn-custom waves-effect waves-light'])?>

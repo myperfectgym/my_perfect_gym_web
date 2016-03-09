@@ -8,20 +8,34 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="exercise-form">
+<?php $form = ActiveForm::begin([
+    'options' =>
+        [
+            'enctype' => 'multipart/form-data',
+        ],
+    'fieldConfig' => [
+        'template' => " <div class=\"form-group\"><label for=\"userName\">{label}</label>{input}<div class=\"col-lg-8\">{error}</div></div>",
+    ],
+]); ?>
 
-    <?php $form = ActiveForm::begin(); ?>
+<p class="text-muted font-13 m-b-30">
+    Your awesome text goes here.
+</p>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->textarea()?>
 
-    <?= $form->field($model, 'link_to_youtoub')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'chest')?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?= $form->field($model, 'back')?>
+
+    <?= $form->field($model, 'hips')?>
+
+    <?= $form->field($model, 'link_to_youtube')?>
+
+    <div class="form-group text-right m-b-0">
+
     </div>
 
-    <?php ActiveForm::end(); ?>
-
-</div>
+<?php ActiveForm::end(); ?>
