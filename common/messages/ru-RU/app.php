@@ -51,4 +51,9 @@ return [
     'Hips' => 'Бёдра',
     'Description' => 'Описание',
     'Name' => 'Имя',
+    'Save' => 'Сохранить',
+    'Error flash update' => 'При обновлении произошла ошибка',
+    'Update exercise' => 'Обновление упражнения',
+    'Create exercise' => 'Создание упражнения',
+    'New exercise' => 'Новое упражнения',
 ];

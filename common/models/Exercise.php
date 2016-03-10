@@ -10,7 +10,6 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property string $description
- * @property string $link_to_youtoub
  *
  * @property TrainingsExercise[] $trainingsExercises
  */
@@ -31,7 +30,7 @@ class Exercise extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
-            [['name', 'link_to_youtoub'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
             [['group_id'], 'integer'],
             [['chest', 'back', 'hips'], 'integer', 'max' => 100]
         ];

@@ -21,21 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <div class="row">
-        <div class="card-box">
-            <div class="row">
-                <div class="col-sm12">
-                    <?= Html::a(Yii::t('app', 'Create Exercise'), ['create'], ['class' => 'btn btn-success btn-custom waves-effect waves-light'])?>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?= ListExercise::widget([
+        'model' => $model,
+        'group_id' => $group_id,
+    ])?>
 
-
-    <div class="row">
-        <?= ListExercise::widget([
-            'model' => $model,
-        ])?>
-    </div>
 </div>
 

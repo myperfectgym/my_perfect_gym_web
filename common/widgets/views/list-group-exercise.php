@@ -1,7 +1,7 @@
 <? foreach ($model as $item): ?>
     <div class="col-lg-4">
         <div class="panel panel-default">
-            <a href="/admin/exercise/index?id=<?= $item->id?>">
+            <a href="/admin/exercise/index?group_id=<?= $item->id?>">
                 <div class="panel-body">
 
                 </div>

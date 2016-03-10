@@ -3,50 +3,29 @@ use yii\helpers\Html;
 use common\models\Files;
 use frontend\models\UserForm;
 ?>
-<!-- Top Bar Start -->
-<div class="topbar">
 
-    <!-- LOGO -->
-    <div class="topbar-left hidden-xs">
-        <div class="text-center">
-            <a href="/" class="logo">
-                <span>My perfect gim</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Button mobile view to collapse sidebar menu -->
-    <div class="navbar navbar-default" role="navigation">
+<header id="topnav">
+    <div class="topbar-main">
         <div class="container">
-            <div class="">
 
-                <ul class="nav navbar-nav main-menu">
-                    <li class="dropdown" >
-                        <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true"><?= Yii::t('app', 'Trainings')?></a>
-                        <ul class="dropdown-menu">
-                            <li><?= Html::a(Yii::t('app', 'List trainings'), ['trainings/'])?>
-                            <li><?= Html::a(Yii::t('app', 'Create training'), ['trainings/create'])?></li>
-                        </ul>
+            <!-- Logo container-->
+            <div class="logo">
+                <a href="/" class="logo">My perfect gim</span></a>
+            </div>
+            <!-- End Logo container-->
+
+            <div class="menu-extras">
+
+                <ul class="nav navbar-nav navbar-right pull-right">
+                    <li>
+                        <form role="search" class="navbar-left app-search pull-left hidden-xs">
+                            <input type="text" placeholder="Search..." class="form-control">
+                            <a href=""><i class="fa fa-search"></i></a>
+                        </form>
                     </li>
-                    <li class="dropdown" >
-                        <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true"><?= Yii::t('app', 'Exercise')?></a>
-                        <ul class="dropdown-menu">
-                            <li><?= Html::a(Yii::t('app', 'List exercise'), ['exercise/'])?>
-                        </ul>
-                    </li>
-                    <li><a href="#">Диеты</a></li>
-                    <li><a href="#">Диеты</a></li>
-                    <li><a href="#">Диеты</a></li>
-                </ul>
 
-                <form role="search" class="navbar-left app-search pull-left hidden-xs">
-                    <input type="text" placeholder="Search..." class="form-control">
-                    <a href=""><i class="fa fa-search"></i></a>
-                </form>
-
-                <ul class="nav navbar-nav navbar-right pull-right avatar">
                     <li class="dropdown">
-                        <a href="" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true">
+                        <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true">
                             <?
                             $avatar = Files::find()
                                 ->where(
@@ -69,33 +48,49 @@ use frontend\models\UserForm;
                         </ul>
                     </li>
                 </ul>
+
+                <div class="menu-item">
+                    <!-- Mobile menu toggle-->
+                    <a class="navbar-toggle">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                    <!-- End mobile menu toggle-->
+                </div>
             </div>
-            <!--/.nav-collapse -->
+
         </div>
     </div>
-</div>
-<!-- Top Bar End -->
-<!-- ========== Left Sidebar Start ========== -->
+    <!-- End topbar -->
 
-<!--<div class="left side-menu">-->
-<!--    <div class="sidebar-inner slimscrollleft">-->
-<!--        <!--- Divider -->-->
-<!--        <div id="sidebar-menu">-->
-<!--            <ul>-->
-<!---->
-<!--                <li class="has_sub">-->
-<!--                    <a href="#" class="waves-effect waves-light"><i class="ti-home"></i> <span> Календарь тренеровок </span> </a>-->
-<!--                    <ul class="list-unstyled">-->
-<!--                        <li><a href="trainings/calendar"> Календарь </a></li>-->
-<!--                        <li><a href="dashboard_2.html"> Прогресс в упражнениях </a></li>-->
-<!--                        <li><a href="dashboard_3.html"> Составление новых тренеровак </a></li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!---->
-<!--            </ul>-->
-<!--            <div class="clearfix"></div>-->
-<!--        </div>-->
-<!--        <div class="clearfix"></div>-->
-<!--    </div>-->
-<!--</div>-->
-<!-- Left Sidebar End -->
+    <!-- Navbar Start -->
+    <div class="navbar-custom">
+        <div class="container">
+            <div id="navigation">
+                <!-- Navigation Menu-->
+                <ul class="navigation-menu">
+                    <li class="has-submenu" >
+                        <a href="#"><?= Yii::t('app', 'Trainings')?></a>
+                        <ul class="submenu">
+                            <li><?= Html::a(Yii::t('app', 'List trainings'), ['trainings/'])?>
+                            <li><?= Html::a(Yii::t('app', 'Create training'), ['trainings/create'])?></li>
+                        </ul>
+                    </li>
+                    <li class="has-submenu" >
+                        <a href="#" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true"><?= Yii::t('app', 'Exercise')?></a>
+                        <ul class="submenu">
+                            <li><?= Html::a(Yii::t('app', 'List exercise'), ['exercise/'])?>
+                        </ul>
+                    </li>
+                    <li><a href="#">Диеты</a></li>
+                    <li><a href="#">Диеты</a></li>
+                    <li><a href="#">Диеты</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- End Navigation Bar-->

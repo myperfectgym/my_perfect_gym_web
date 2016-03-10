@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'description:ntext',
-            'link_to_youtoub',
+            'link_to_youtube',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

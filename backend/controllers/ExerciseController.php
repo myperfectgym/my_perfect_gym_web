@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\form\ExerciseForm;
 use Yii;
 use common\models\Exercise;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -30,26 +31,15 @@ class ExerciseController extends Controller
      * Lists all Exercise models.
      * @return mixed
      */
-    public function actionIndex($id)
+    public function actionIndex($group_id)
     {
-        $model = Exercise::find()
-            ->where(['group_id' => $id])
+        $model = ExerciseForm::find()
+            ->where(['group_id' => $group_id])
             ->all();
 
         return $this->render('index', [
             'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays a single Exercise model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+            'group_id'  => $group_id,
         ]);
     }
 
@@ -58,15 +48,38 @@ class ExerciseController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($group_id)
     {
         $model = new ExerciseForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $transaction = Yii::$app->db->beginTransaction();
+
+            try {
+
+                if (!$model->save()) {
+                    throw new Exception();
+                }
+
+                if ($model->link_to_youtube) {
+                    $model->attachLink();
+                }
+
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Exercise').' '.$model->name. ' успешно создано');
+                $transaction->commit();
+
+            }catch (Exception $ex) {
+
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Exercise').' '.$model->name. ' успешно создано');
+                $transaction->rollBack();
+            }
+
+            return $this->redirect(['index', 'group_id' => $model->group_id]);
+
         } else {
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model
             ]);
         }
     }
@@ -80,9 +93,33 @@ class ExerciseController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->link_to_youtube = $model->getYoutube()->link;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+
+            $transaction = Yii::$app->db->beginTransaction();
+
+            try {
+
+                if (!$model->save()) {
+                    throw new Exception();
+                }
+
+                if ($model->link_to_youtube) {
+                    $model->attachLink();
+                }
+
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Exercise').' '.$model->name. ' успешно обновлено');
+
+            }catch (Exception $ex) {
+
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Error flash update'));
+                $transaction->rollBack();
+            }
+
+            return $this->redirect(['index', 'id' => $model->group_id]);
+
         } else {
             return $this->render('update', [
                 'model' => $model,

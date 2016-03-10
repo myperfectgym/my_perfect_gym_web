@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'css/pages.css',
         'css/responsive.css',
         'css/site.css',
+        'css/menu.css'
     ];
     public $js = [
         'js/detect.js',
