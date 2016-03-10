@@ -39,7 +39,7 @@ class ExerciseForm extends Exercise
             $model = new Youtube();
         }
 
-        if ($model->oldAttributes['link'] == $model->link) {
+        if ($model->oldAttributes['link'] == $this->link_to_youtube) {
             return;
         }
 
