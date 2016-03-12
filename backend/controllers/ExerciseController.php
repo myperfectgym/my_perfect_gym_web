@@ -9,6 +9,8 @@ use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use common\models\Files;
 
 /**
  * ExerciseController implements the CRUD actions for Exercise model.
@@ -50,9 +52,12 @@ class ExerciseController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new ExerciseForm();
 
         if ($model->load(Yii::$app->request->post())) {
+
+            $model->files = UploadedFile::getInstances($model, 'files');
 
             $transaction = Yii::$app->db->beginTransaction();
 
@@ -60,6 +65,13 @@ class ExerciseController extends Controller
 
                 if (!$model->save()) {
                     throw new Exception();
+                }
+
+                foreach ($model->files as $file) {
+
+                    $fileModel = new Files();
+
+                    $fileModel->attachModel($model, $file);
                 }
 
                 if ($model->link_to_youtube) {
@@ -71,11 +83,11 @@ class ExerciseController extends Controller
 
             }catch (Exception $ex) {
 
-                Yii::$app->session->setFlash('error', Yii::t('app', 'Exercise').' '.$model->name. ' успешно создано');
+                Yii::$app->session->setFlash('error', 'Ошибка при создании: '.Yii::t('app', 'Exercise').' '.$model->name);
                 $transaction->rollBack();
             }
 
-            return $this->redirect(['index', 'group_id' => $model->group_id]);
+            return $this->redirect('index', ['group_id' => $model->group_id]);
         }
     }
 

@@ -29,6 +29,7 @@ class Exercise extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name'], 'required'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['group_id'], 'integer'],

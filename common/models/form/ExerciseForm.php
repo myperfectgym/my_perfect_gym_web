@@ -5,10 +5,12 @@ namespace common\models\form;
 use common\models\Exercise;
 use common\models\Youtube;
 use yii\base\Exception;
+use common\models\Files;
 
 class ExerciseForm extends Exercise
 {
     public $link_to_youtube;
+    public $files;
 
     public function init()
     {
@@ -20,7 +22,8 @@ class ExerciseForm extends Exercise
     public function rules()
     {
         return array_merge(parent::rules(), [
-            [['link_to_youtube'], 'string']
+            [['link_to_youtube'], 'string'],
+            [['files'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 6],
         ]);
     }
 
@@ -28,9 +31,21 @@ class ExerciseForm extends Exercise
     {
         return array_merge(parent::attributeLabels(), [
             'link_to_youtube' => 'Ссылка на youtube',
+            'files' => 'Картинки'
         ]);
     }
 
+    public function beforeDelete()
+    {
+        foreach($this->getImageFile() as $file) {
+            $file->delete();
+        }
+
+        return parent::beforeDelete();
+    }
+
+
+    //Need rewrite to model Youtube;
     public function attachLink()
     {
         $model = $this->getYoutube();
@@ -62,5 +77,12 @@ class ExerciseForm extends Exercise
                 'modelname' => $this::className(),
             ])
             ->one();
+    }
+
+    public function getImageFile()
+    {
+        return Files::find()
+            ->where(['model_id' => $this->id, 'modelname' => $this::className()])
+            ->all();
     }
 }

@@ -56,4 +56,9 @@ return [
     'Update exercise' => 'Обновление упражнения',
     'Create exercise' => 'Создание упражнения',
     'New exercise' => 'Новое упражнения',
+    'delete' => 'удалить',
+    'Drop files here to upload' => 'Перетащите файлы в эту область...',
+    'Muscle groups' => 'Группы мышц',
+    'Images' => 'Картинки',
+    'Site' => 'Сайт',
 ];

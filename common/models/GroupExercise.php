@@ -28,6 +28,7 @@ class GroupExercise extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 255]
         ];
     }
@@ -39,9 +40,25 @@ class GroupExercise extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => Yii::t('app', 'Name'),
         ];
     }
+
+    public function beforeDelete()
+    {
+        $exercise = Exercise::find()
+            ->where(['group_id' => $this->id])
+            ->all();
+
+        foreach ($exercise as $deleteModel) {
+
+            $deleteModel->delete();
+        }
+
+        return parent::beforeDelete();
+    }
+
+
 
     /**
      * @return \yii\db\ActiveQuery

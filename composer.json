@@ -22,7 +22,10 @@
         "bower-asset/fullcalendar":   "2.6.1",
         "bower-asset/moment":   "2.11.2",
         "bower-asset/select2":   "4.0.1",
-        "lavrentiev/yii2-toastr": "2.0.0"
+        "bower-asset/dropzone":   "*",
+        "lavrentiev/yii2-toastr": "2.0.0",
+        "kartik-v/yii2-widget-activeform": "@dev",
+        "kartik-v/yii2-widget-fileinput": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
