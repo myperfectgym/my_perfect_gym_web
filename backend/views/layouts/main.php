@@ -5,7 +5,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use frontend\assets\AppAsset;
+use backend\assets\AppAsset;
 use lavrentiev\widgets\toastr\NotificationFlash;
 
 AppAsset::register($this);
@@ -27,7 +27,7 @@ AppAsset::register($this);
     <![endif]-->
     <script src="/js/modernizr.min.js"></script>
 </head>
-<body class="smallscreen fixed-left">
+<body class="fixed-left">
 <?php $this->beginBody() ?>
 
 <?= NotificationFlash::widget([
@@ -50,7 +50,7 @@ AppAsset::register($this);
     ]
 ]) ?>
 
-<div id="wrapper" class="right-bar-enabled forced">
+<div id="wrapper">
 
     <?= $this->render('_nav')?>
 

@@ -48,7 +48,7 @@ class ExerciseController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($group_id)
+    public function actionCreate()
     {
         $model = new ExerciseForm();
 
@@ -76,11 +76,6 @@ class ExerciseController extends Controller
             }
 
             return $this->redirect(['index', 'group_id' => $model->group_id]);
-
-        } else {
-            return $this->render('create', [
-                'model' => $model
-            ]);
         }
     }
 
@@ -120,10 +115,6 @@ class ExerciseController extends Controller
 
             return $this->redirect(['index', 'group_id' => $model->group_id]);
 
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
         }
     }
 

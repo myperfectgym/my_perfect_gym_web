@@ -61,11 +61,9 @@ class GroupExerciseController extends Controller
         $model = new GroupExercise();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Group exercise').' '.$model->name.' успешно создан');
+            return $this->redirect(['index']);
         }
     }
 
@@ -80,25 +78,21 @@ class GroupExerciseController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Group exercise').' '.$model->name.' успешно создан');
+            return $this->redirect(['index']);
         }
     }
 
     /**
      * Deletes an existing GroupExercise model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
+        $id = Yii::$app->request->post('id');
 
-        return $this->redirect(['index']);
+        $this->findModel($id)->delete();
     }
 
     /**

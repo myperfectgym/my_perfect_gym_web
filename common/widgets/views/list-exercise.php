@@ -7,14 +7,19 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->registerJsFile('/js/custom-widget/list-exercise.js', [
+$this->registerJs("
+    $('.remove').click(function(){
 
-    'depends' => [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-    ]
-]);
+        var id = $(this).data('id');
+        $.post(
+            '/admin/exercise/delete',
+            {id: id},
+            function(data){
 
+            }
+        );
+    });
+");
 ?>
 
 <div class="row">
@@ -37,7 +42,7 @@ $this->registerJsFile('/js/custom-widget/list-exercise.js', [
                                     [
                                         'enctype' => 'multipart/form-data',
                                     ],
-                                'action'  => "create?group_id=$createModel->group_id",
+                                'action'  => "create",
                                 'fieldConfig' => [
                                     'template' => " <div class=\"form-group\"><label for=\"userName\">{label}</label>{input}<div class=\"col-lg-8\">{error}</div></div>",
                                 ],
