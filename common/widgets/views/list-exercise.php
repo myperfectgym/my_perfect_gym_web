@@ -127,25 +127,25 @@ $this->registerJs("
 
                 <ul class="nav nav-tabs tabs">
                     <li class="active tab">
-                        <a href="#home-2" data-toggle="tab" aria-expanded="false">
+                        <a href="#description-<?= $item->id?>" data-toggle="tab" aria-expanded="false">
                             <span class="visible-xs"><i class="md md-format-align-justify"></i></span>
                             <span class="hidden-xs"><?= Yii::t('app', 'Description')?></span>
                         </a>
                     </li>
                     <li class="tab">
-                        <a href="#profile-2" data-toggle="tab" aria-expanded="false">
+                        <a href="#image-<?= $item->id?>" data-toggle="tab" aria-expanded="false">
                             <span class="visible-xs"><i class="md md-camera-alt"></i></span>
                             <span class="hidden-xs"><?= Yii::t('app', 'Images')?></span>
                         </a>
                     </li>
                     <li class="tab">
-                        <a href="#messages-2" data-toggle="tab" aria-expanded="true">
+                        <a href="#youtube-<?= $item->id?>" data-toggle="tab" aria-expanded="true">
                             <span class="visible-xs"><i class="md md-videocam"></i></span>
                             <span class="hidden-xs"><?= Yii::t('app', 'Youtube')?></span>
                         </a>
                     </li>
                     <li class="tab">
-                        <a href="#settings-2" data-toggle="tab" aria-expanded="false">
+                        <a href="#muscle-groups-<?= $item->id?>" data-toggle="tab" aria-expanded="false">
                             <span class="visible-xs"><i class="md md-trending-up"></i></span>
                             <span class="hidden-xs"><?= Yii::t('app', 'Muscle groups')?></span>
                         </a>
@@ -153,7 +153,7 @@ $this->registerJs("
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane active" id="home-2">
+                    <div class="tab-pane active" id="description-<?= $item->id?>">
 
                         <div id="bg-default" class="panel-collapse collapse in">
 
@@ -165,7 +165,7 @@ $this->registerJs("
                         </div>
                     </div>
 
-                    <div class="tab-pane" id="profile-2">
+                    <div class="tab-pane" id="image-<?= $item->id?>">
 
                         <div class="p-20 images-exercise">
                             <? foreach($item->getImageFile() as $file): ?>
@@ -177,15 +177,15 @@ $this->registerJs("
 
                     </div>
 
-                    <div class="tab-pane" id="messages-2">
+                    <div class="tab-pane" id="youtube-<?= $item->id?>">
 
-                        <div class="p-20">
-                            <iframe  src="<?= $item->getYoutube()->link?>" frameborder="0" allowfullscreen></iframe>
+                        <div class="p-20 youtube-exercise">
+                            <iframe class="col-sm-4" src="<?= $item->getYoutube()->link?>" frameborder="0" allowfullscreen></iframe>
                         </div>
 
                     </div>
 
-                    <div class="tab-pane" id="settings-2">
+                    <div class="tab-pane" id="muscle-groups-<?= $item->id?>">
                         <div class="p-20">
                             <div class="m-b-15">
                                 <h5><?= Yii::t('app', 'Chest')?><span class="pull-right"><?= $item->chest?>%</span></h5>
@@ -254,6 +254,16 @@ $this->registerJs("
                                 <?= $form->field($item, 'hips')?>
 
                                 <?= $form->field($item, 'link_to_youtube')?>
+
+                                <?= FileInput::widget([
+                                    'name' => 'files[]',
+                                    'language' => 'ru',
+                                    'options' => ['multiple' => true],
+                                    'pluginOptions' => [
+                                        'showUpload' => false,
+                                        'allowedFileExtensions'=>['jpg','gif','png']
+                                    ]
+                                ])?>
 
 <!--                                --><?//= $form->field($item, 'files[]')->widget(FileInput::className(), [
 //                                    'language' => 'ru',

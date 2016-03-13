@@ -6,7 +6,7 @@ namespace common\widgets;
  * @var $model ActiveRecord
  */
 
-use common\models\GroupExercise;
+use common\models\form\GroupExerciseForm;
 use yii\base\Widget;
 use yii\db\ActiveRecord;
 
@@ -21,7 +21,7 @@ class ListGroupExercise extends Widget
 
     public function run()
     {
-        $createModel = new GroupExercise();
+        $createModel = new GroupExerciseForm();
 
         return $this->render('list-group-exercise',
             [

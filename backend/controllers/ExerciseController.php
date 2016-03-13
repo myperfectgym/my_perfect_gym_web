@@ -57,11 +57,11 @@ class ExerciseController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            $model->files = UploadedFile::getInstances($model, 'files');
-
             $transaction = Yii::$app->db->beginTransaction();
 
             try {
+
+                $model->files = UploadedFile::getInstances($model, 'files');
 
                 if (!$model->save()) {
                     throw new Exception();

@@ -2,11 +2,15 @@
 
 namespace backend\controllers;
 
+use common\models\form\GroupExerciseForm;
 use Yii;
 use common\models\GroupExercise;
+use yii\base\Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use common\models\Files;
 
 /**
  * GroupExerciseController implements the CRUD actions for GroupExercise model.
@@ -31,23 +35,11 @@ class GroupExerciseController extends Controller
      */
     public function actionIndex()
     {
-        $model = GroupExercise::find()
+        $model = GroupExerciseForm::find()
             ->all();
 
         return $this->render('index', [
             'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays a single GroupExercise model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -58,11 +50,32 @@ class GroupExerciseController extends Controller
      */
     public function actionCreate()
     {
-        $model = new GroupExercise();
+        $model = new GroupExerciseForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
 
-            Yii::$app->session->setFlash('success', Yii::t('app', 'Group exercise').' '.$model->name.' успешно создан');
+            $transaction = Yii::$app->db->beginTransaction();
+
+            try {
+
+                if (!$model->save()) {
+                    throw new Exception();
+                }
+
+                $model->file = UploadedFile::getInstances($model, 'file');
+
+                $fileModel = new Files();
+
+                $fileModel->attachModel($model, $model->file);
+
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Group exercise').' '.$model->name.' успешно создан');
+            } catch (Exception $ex) {
+
+                Yii::$app->session->setFlash('error', 'Ошибка при создании '.Yii::t('app', 'Group exercise').' '.$model->name);
+                $transaction->rollBack();
+            }
+
             return $this->redirect(['index']);
         }
     }
@@ -104,7 +117,7 @@ class GroupExerciseController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = GroupExercise::findOne($id)) !== null) {
+        if (($model = GroupExerciseForm::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

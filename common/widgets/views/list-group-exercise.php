@@ -1,6 +1,7 @@
 <?
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use kartik\file\FileInput;
 
 /**
  * @var $this \yii\web\View;
@@ -53,6 +54,14 @@ $this->registerJs("
                             </p>
 
                             <?= $form->field($createModel, 'name')?>
+
+                            <?= $form->field($createModel, 'file')->widget(FileInput::className(), [
+                                'language' => 'ru',
+                                'pluginOptions' => [
+                                    'showUpload' => false,
+                                    'allowedFileExtensions'=>['jpg','gif','png']
+                                ]
+                            ])?>
 
                         </div>
                         <div class="modal-footer">
@@ -128,7 +137,11 @@ $this->registerJs("
             <div class="panel panel-default">
                 <a href="/admin/exercise/index?group_id=<?= $item->id?>">
                     <div class="panel-body">
-
+                        <div class="p-20 images-exercise">
+                            <? if($item->getImageFile()->path): ?>
+                                <img src="<?= $item->getImageFile()->path?>" alt="image" class="img-responsive">
+                            <? endif ?>
+                        </div>
                     </div>
                 </a>
 
