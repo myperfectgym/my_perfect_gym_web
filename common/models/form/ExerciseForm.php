@@ -29,7 +29,7 @@ class ExerciseForm extends Exercise
     {
         return array_merge(parent::rules(), [
             [['link_to_youtube'], 'string'],
-            [['files'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 6],
+            [['files'], 'file', 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 6],
         ]);
     }
 
@@ -61,8 +61,12 @@ class ExerciseForm extends Exercise
             $model = new Youtube();
         }
 
-        if ($model->oldAttributes['link'] == $this->link_to_youtube) {
+        if ($model->link == $this->link_to_youtube) {
             return;
+        }
+
+        if (trim($this->link_to_youtube)) {
+            $model->delete();
         }
 
         $model->model_id = $this->id;

@@ -112,16 +112,14 @@ class ExerciseController extends Controller
                     throw new Exception();
                 }
 
-                if ($model->link_to_youtube) {
-                    $model->attachLink();
-                }
+                $model->attachLink();
 
                 $transaction->commit();
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Exercise').' '.$model->name. ' успешно обновлено');
 
             }catch (Exception $ex) {
 
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Error flash update'));
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Error flash update'));
                 $transaction->rollBack();
             }
 
