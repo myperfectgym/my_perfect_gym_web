@@ -87,7 +87,7 @@ class ExerciseController extends Controller
                 $transaction->rollBack();
             }
 
-            return $this->redirect('index', ['group_id' => $model->group_id]);
+            return $this->redirect(['index', 'group_id' => $model->group_id]);
         }
     }
 

@@ -48,6 +48,19 @@ class Files extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeDelete()
+    {
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/frontend/web' . $this->path)) {
+            return parent::beforeDelete();
+        }
+
+        if(!unlink($_SERVER['DOCUMENT_ROOT'] . '/frontend/web' . $this->path)) {
+           throw new Exception();
+        };
+
+        return parent::beforeDelete();
+    }
+
     public function attachModel($model, $file)
     {
         $this->modelname = $model::className();

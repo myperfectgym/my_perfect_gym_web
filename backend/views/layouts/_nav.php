@@ -50,7 +50,7 @@ use frontend\models\UserForm;
             <ul>
 
                 <li class="has_sub">
-                    <a href="#" class="waves-effect waves-light"><i class="ti-home"></i> <span> <?= Yii::t('app', 'Content')?> </span> </a>
+                    <a href="#" class="waves-effect waves-light"><i class="md md-content-paste"></i> <span> <?= Yii::t('app', 'Content')?> </span> </a>
                     <ul class="list-unstyled">
                         <li><?= Html::a(Yii::t('app', 'Exercise'), ['group-exercise/'])?></li>
                     </ul>

@@ -16,7 +16,13 @@ class ExerciseForm extends Exercise
     {
         parent::init();
 
-        $this->link_to_youtube = $this->getYoutube();
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+
+        $this->link_to_youtube = $this->getYoutube()->link;
     }
 
     public function rules()
@@ -38,6 +44,7 @@ class ExerciseForm extends Exercise
     public function beforeDelete()
     {
         foreach($this->getImageFile() as $file) {
+
             $file->delete();
         }
 
@@ -64,7 +71,6 @@ class ExerciseForm extends Exercise
         $model->link = $this->link_to_youtube;
 
         if (!$model->save()) {
-
             throw new Exception();
         }
     }

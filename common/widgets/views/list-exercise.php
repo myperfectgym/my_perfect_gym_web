@@ -49,7 +49,7 @@ $this->registerJs("
                                     ],
                                 'action'  => "create",
                                 'fieldConfig' => [
-                                    'template' => " <div class=\"form-group\"><label for=\"userName\">{label}</label>{input}<div class=\"col-lg-8\">{error}</div></div>",
+                                    'template' => " <div class=\"form-group\"><label>{label}</label>{input}<div class=\"col-lg-8\">{error}</div></div>",
                                 ],
                             ]); ?>
 
@@ -78,7 +78,7 @@ $this->registerJs("
                                     'options' => ['multiple' => true],
                                     'pluginOptions' => [
                                         'showUpload' => false,
-                                        'previewFileType' => 'jpg, jpeg, png',
+                                        'allowedFileExtensions'=>['jpg','gif','png']
                                     ]
                                 ]); ?>
 
@@ -107,7 +107,7 @@ $this->registerJs("
 
 <div class="row">
 
-    <? foreach ($model as $item) : ?>
+<? foreach ($model as $item) : ?>
 
     <div class="row">
         <div class="col-md-12">
@@ -128,25 +128,25 @@ $this->registerJs("
                 <ul class="nav nav-tabs tabs">
                     <li class="active tab">
                         <a href="#home-2" data-toggle="tab" aria-expanded="false">
-                            <span class="visible-xs"><i class="fa fa-home"></i></span>
+                            <span class="visible-xs"><i class="md md-format-align-justify"></i></span>
                             <span class="hidden-xs"><?= Yii::t('app', 'Description')?></span>
                         </a>
                     </li>
                     <li class="tab">
                         <a href="#profile-2" data-toggle="tab" aria-expanded="false">
-                            <span class="visible-xs"><i class="fa fa-user"></i></span>
+                            <span class="visible-xs"><i class="md md-camera-alt"></i></span>
                             <span class="hidden-xs"><?= Yii::t('app', 'Images')?></span>
                         </a>
                     </li>
                     <li class="tab">
                         <a href="#messages-2" data-toggle="tab" aria-expanded="true">
-                            <span class="visible-xs"><i class="fa fa-envelope-o"></i></span>
+                            <span class="visible-xs"><i class="md md-videocam"></i></span>
                             <span class="hidden-xs"><?= Yii::t('app', 'Youtube')?></span>
                         </a>
                     </li>
                     <li class="tab">
                         <a href="#settings-2" data-toggle="tab" aria-expanded="false">
-                            <span class="visible-xs"><i class="fa fa-cog"></i></span>
+                            <span class="visible-xs"><i class="md md-trending-up"></i></span>
                             <span class="hidden-xs"><?= Yii::t('app', 'Muscle groups')?></span>
                         </a>
                     </li>
@@ -233,7 +233,7 @@ $this->registerJs("
                                     ],
                                 'action'  => "update?id=$item->id",
                                 'fieldConfig' => [
-                                    'template' => " <div class=\"form-group\"><label for=\"userName\">{label}</label>{input}<div class=\"col-lg-8\">{error}</div></div>",
+                                    'template' => " <div class=\"form-group\"><label>{label}</label>{input}<div class=\"col-lg-8\">{error}</div></div>",
                                 ],
                             ]); ?>
 
@@ -255,14 +255,14 @@ $this->registerJs("
 
                                 <?= $form->field($item, 'link_to_youtube')?>
 
-                                <?= $form->field($item, 'files[]')->widget(FileInput::className(), [
-                                    'language' => 'ru',
-                                    'options' => ['multiple' => true],
-                                    'pluginOptions' => [
-                                        'showUpload' => false,
-                                        'previewFileType' => 'jpg, jpeg, png',
-                                    ]
-                                ]); ?>
+<!--                                --><?//= $form->field($item, 'files[]')->widget(FileInput::className(), [
+//                                    'language' => 'ru',
+//                                    'options' => ['multiple' => true],
+//                                    'pluginOptions' => [
+//                                        'showUpload' => false,
+//                                        'allowedFileExtensions'=>['jpg','gif','png']
+//                                    ]
+//                                ]); ?>
 
                             </div>
                             <div class="modal-footer">
@@ -280,5 +280,6 @@ $this->registerJs("
         </div>
     </div>
 
-    <? endforeach; ?>
+<? endforeach; ?>
+
 </div>
