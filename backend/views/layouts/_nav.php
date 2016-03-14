@@ -10,7 +10,7 @@ use frontend\models\UserForm;
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>My perfect gym</span></a>
+            <a href="/admin/" class="logo"><i class="icon-magnet icon-c-logo"></i><span>My perfect gym</span></a>
         </div>
     </div>
 

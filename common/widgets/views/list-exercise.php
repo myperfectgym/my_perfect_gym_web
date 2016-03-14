@@ -23,8 +23,56 @@ $this->registerJs("
         );
     });
 
+    $('.remove-image').click(function(){
+
+        var id = $(this).data('id');
+        $.post(
+            '/admin/exercise/delete-image',
+            {id: id},
+            function(data){
+
+            }
+        );
+    });
 ");
+
+foreach ($model as $item) {
+    $this->registerJs("
+        Dropzone.options.exerciseDropzone$item->id = {
+            url: 'add-new-photo',
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            parallelUploads: 6,
+            maxFiles: 6,
+            maxFilesize: 10,
+            acceptedFiles: 'image/*',
+            addRemoveLinks: true,
+            dictDefaultMessage: '" . Yii::t('app', 'Drop files here to upload') . "',
+            dictRemoveFile: '" . Yii::t('app', 'delete') . "',
+            init: function() {
+                var dzClosure  = this;
+
+                $('#send-exercise-photo-$item->id').click(function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dzClosure.processQueue();
+                });
+
+                this.on('sendingmultiple', function(data, xhr, formData) {
+                    formData.append('_csrf', yii.getCsrfToken());
+                    formData.append('id', $('#model-id-$item->id').val());
+                });
+
+            },
+            success: function(file, response){
+
+            }
+        }
+    ");
+}
 ?>
+
+
 
 <div class="row">
     <div class="card-box">
@@ -40,12 +88,11 @@ $this->registerJs("
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 <h4 class="modal-title" id="myModalLabel"><?= Yii::t('app', 'New exercise')?></h4>
                             </div>
-
                             <?php $form = ActiveForm::begin([
                                 'options' =>
                                     [
                                         'enctype' => 'multipart/form-data',
-                                        'id'    =>  'dropzone'
+                                        'id'    => 'create',
                                     ],
                                 'action'  => "create",
                                 'fieldConfig' => [
@@ -167,10 +214,35 @@ $this->registerJs("
 
                     <div class="tab-pane" id="image-<?= $item->id?>">
 
+                        <div class="row">
+                            <div class="col-md-12 portlets">
+                                <!-- Your awesome content goes here -->
+                                <div class="m-b-30">
+                                    <input type="hidden" id="model-id-<?= $item->id?>" value="<?= $item->id?>">
+                                    <div class="dropzone dz-clickable" id="exerciseDropzone<?= $item->id?>"></div>
+
+                                    <div class="clearfix pull-right m-t-15">
+                                        <button id="send-exercise-photo-<?= $item->id?>" type="button"
+                                                class="btn btn-pink btn-rounded waves-effect waves-light">
+                                            <?= Yii::t('app', 'Upload')?>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="p-20 images-exercise">
                             <? foreach($item->getImageFile() as $file): ?>
                                 <div class="col-sm-4">
-                                    <img src="<?= $file->path?>" alt="image" class="img-responsive">
+                                    <div class="portlet image-portlet">
+                                        <div class="portlet-heading portlet-default">
+                                            <div class="portlet-widgets">
+                                                <a href="#" data-toggle="remove" class="remove-image" data-id="<?= $file->id?>"><i class="ion-close-round"></i></a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <img src="<?= $file->path?>" alt="image" class="img-responsive img-rounded" height="200">
+                                    </div>
                                 </div>
                             <? endforeach; ?>
                         </div>
@@ -180,7 +252,8 @@ $this->registerJs("
                     <div class="tab-pane" id="youtube-<?= $item->id?>">
 
                         <div class="p-20 youtube-exercise">
-                            <iframe class="col-sm-4" src="<?= $item->getYoutube()->link?>" frameborder="0" allowfullscreen></iframe>
+                            <iframe class="col-sm-4" src="<?= $item->getYoutube()->link?>" frameborder="0" allowfullscreen>
+                            </iframe>
                         </div>
 
                     </div>
@@ -225,11 +298,11 @@ $this->registerJs("
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                 <h4 class="modal-title" id="myModalLabel"><?= $item->name?></h4>
                             </div>
-
                             <?php $form = ActiveForm::begin([
                                 'options' =>
                                     [
                                         'enctype' => 'multipart/form-data',
+                                        'id'    => $item->id,
                                     ],
                                 'action'  => "update?id=$item->id",
                                 'fieldConfig' => [
@@ -254,25 +327,6 @@ $this->registerJs("
                                 <?= $form->field($item, 'hips')?>
 
                                 <?= $form->field($item, 'link_to_youtube')?>
-
-                                <?= FileInput::widget([
-                                    'name' => 'files[]',
-                                    'language' => 'ru',
-                                    'options' => ['multiple' => true],
-                                    'pluginOptions' => [
-                                        'showUpload' => false,
-                                        'allowedFileExtensions'=>['jpg','gif','png']
-                                    ]
-                                ])?>
-
-<!--                                --><?//= $form->field($item, 'files[]')->widget(FileInput::className(), [
-//                                    'language' => 'ru',
-//                                    'options' => ['multiple' => true],
-//                                    'pluginOptions' => [
-//                                        'showUpload' => false,
-//                                        'allowedFileExtensions'=>['jpg','gif','png']
-//                                    ]
-//                                ]); ?>
 
                             </div>
                             <div class="modal-footer">

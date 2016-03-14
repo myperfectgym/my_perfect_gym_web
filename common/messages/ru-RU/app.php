@@ -61,4 +61,5 @@ return [
     'Muscle groups' => 'Группы мышц',
     'Images' => 'Картинки',
     'Site' => 'Сайт',
+    'Upload' => 'Загрузить',
 ];

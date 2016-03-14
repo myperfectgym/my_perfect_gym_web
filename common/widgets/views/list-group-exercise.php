@@ -57,6 +57,7 @@ $this->registerJs("
 
                             <?= $form->field($createModel, 'file')->widget(FileInput::className(), [
                                 'language' => 'ru',
+                                'options' => ['accept' => 'image/*'],
                                 'pluginOptions' => [
                                     'showUpload' => false,
                                     'allowedFileExtensions'=>['jpg','gif','png']

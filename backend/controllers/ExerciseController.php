@@ -24,9 +24,17 @@ class ExerciseController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
+                    'add-new-photo' => ['post'],
+                    'delete-image' => ['post'],
                 ],
             ],
         ];
+    }
+
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = ($action->id !== "add-new-photo");
+        $this->enableCsrfValidation = ($action->id !== "delete-image");
+        return parent::beforeAction($action);
     }
 
     /**
@@ -100,7 +108,6 @@ class ExerciseController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->link_to_youtube = $model->getYoutube()->link;
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -124,7 +131,6 @@ class ExerciseController extends Controller
             }
 
             return $this->redirect(['index', 'group_id' => $model->group_id]);
-
         }
     }
 
@@ -139,6 +145,38 @@ class ExerciseController extends Controller
         $id = Yii::$app->request->post('id');
 
         $this->findModel($id)->delete();
+    }
+
+    public function actionAddNewPhoto()
+    {
+        $id = Yii::$app->request->post('id');
+        $model = $this->findModel($id);
+
+        $files = [];
+
+        foreach($_FILES['file']['name'] as $key => $file) {
+            $uploadFile = new UploadedFile();
+            $uploadFile->name = $_FILES['file']['name'][$key];
+            $uploadFile->type = $_FILES['file']['type'][$key];
+            $uploadFile->tempName = $_FILES['file']['tmp_name'][$key];
+            $uploadFile->error = $_FILES['file']['error'][$key];
+            $uploadFile->size = $_FILES['file']['size'][$key];
+            $files[] = $uploadFile;
+        }
+
+        foreach ($files as $file) {
+            $fileModel = new Files();
+            $fileModel->attachModel($model, $file);
+        }
+    }
+
+    public function actionDeleteImage() {
+
+        $id = Yii::$app->request->post('id');
+
+        Files::find()
+            ->where(['id' => $id])
+            ->one()->delete();
     }
 
     /**

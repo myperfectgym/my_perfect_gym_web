@@ -66,7 +66,7 @@ class GroupExerciseController extends Controller
 
                 $fileModel = new Files();
 
-                $fileModel->attachModel($model, $model->file);
+                $fileModel->attachModel($model, $model->file[0]);
 
                 $transaction->commit();
                 Yii::$app->session->setFlash('success', Yii::t('app', 'Group exercise').' '.$model->name.' успешно создан');

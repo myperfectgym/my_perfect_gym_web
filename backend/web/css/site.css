@@ -1,3 +1,7 @@
 .images-exercise, .youtube-exercise {
     overflow: hidden;
 }
+
+.image-portlet {
+    height: 400px;
+}
