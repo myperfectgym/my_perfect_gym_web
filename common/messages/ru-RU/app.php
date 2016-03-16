@@ -6,6 +6,7 @@ return [
     'Password repeat' => 'Повторите пароль',
     'Password' => 'Пароль',
     'A user with this name already exists' => 'Пользователь с таким именем уже существует',
+    'A exercise with this name already exists' => 'Такое упражнение уже существует',
     'A user already exists with this email address' => 'Пользователь уже существует с таким адресом электронной почты',
     'Username' => 'Имя пользователя',
     'Profile' => 'Профиль',
@@ -62,4 +63,5 @@ return [
     'Images' => 'Картинки',
     'Site' => 'Сайт',
     'Upload' => 'Загрузить',
+    'Choose the exercise...' => 'Выбирите упражнение...',
 ];

@@ -1,7 +1,7 @@
 <?
 use yii\helpers\Html;
 use common\models\Files;
-use frontend\models\UserForm;
+use frontend\models\form\UserForm;
 ?>
 
 <header id="topnav">

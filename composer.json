@@ -23,9 +23,11 @@
         "bower-asset/moment":   "2.11.2",
         "bower-asset/select2":   "4.0.1",
         "bower-asset/dropzone":   "*",
+        "bower-asset/sweetalert":   "*",
         "lavrentiev/yii2-toastr": "2.0.0",
         "kartik-v/yii2-widget-activeform": "@dev",
-        "kartik-v/yii2-widget-fileinput": "@dev"
+        "kartik-v/yii2-widget-fileinput": "@dev",
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

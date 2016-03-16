@@ -2,12 +2,12 @@
 
 namespace frontend\controllers;
 
-use common\models\Trainings;
+use frontend\models\form\TrainingForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\ContactForm;
+
 
 class TrainingsController extends Controller {
 
@@ -54,7 +54,15 @@ class TrainingsController extends Controller {
 
     public function actionCreate() {
 
-        $model = new Trainings();
+        $model = new TrainingForm();
+
+        if (Yii::$app->request->isPost) {
+
+            echo "<pre>";
+                print_r(Yii::$app->request->post());
+            echo "</pre>";
+            exit;
+        }
 
         return $this->render('create', [
             'model' => $model,

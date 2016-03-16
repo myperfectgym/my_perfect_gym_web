@@ -32,6 +32,7 @@ class Exercise extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
+            [['name'], 'validateExerciseName'],
             [['group_id'], 'integer'],
             [['chest', 'back', 'hips'], 'integer', 'max' => 100]
         ];
@@ -50,6 +51,17 @@ class Exercise extends \yii\db\ActiveRecord
             'back' => Yii::t('app', 'Back'),
             'hips' => Yii::t('app', 'Hips'),
         ];
+    }
+
+    public function validateExerciseName($attribute, $params)
+    {
+        $user = Exercise::find()
+            ->where(['name' => $this->name])
+            ->one();
+
+        if ($user) {
+            $this->addError($attribute, Yii::t('app', 'A exercise with this name already exists'));
+        }
     }
 
     /**
