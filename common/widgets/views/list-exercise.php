@@ -9,20 +9,9 @@ use kartik\form\ActiveForm;
 use kartik\file\FileInput;
 
 $this->registerAssetBundle(backend\assets\DropZoneAsset::className());
+$this->registerAssetBundle(backend\assets\SweetAlert::className());
 
 $this->registerJs("
-    $('.remove').click(function(){
-
-        var id = $(this).data('id');
-        $.post(
-            '/admin/exercise/delete',
-            {id: id},
-            function(data){
-
-            }
-        );
-    });
-
     $('.remove-image').click(function(){
 
         var id = $(this).data('id');
@@ -33,6 +22,37 @@ $this->registerJs("
 
             }
         );
+    });
+
+    $('.remove').click(function(){
+        var id = $(this).data('id');
+        swal({
+            title: '".Yii::t('app', 'Are you sure?')."',
+            text: '".Yii::t('app', 'Exercise will be deleted')."',
+            type: \"warning\",
+            showCancelButton: true,
+            confirmButtonColor: \"#DD6B55\",
+            confirmButtonText: '".Yii::t('app', 'Yes, delete it!')."',
+            cancelButtonText: '".Yii::t('app', 'No')."',
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm){
+            if (isConfirm) {
+
+                $.post(
+                    '/admin/exercise/delete',
+                    {id: id},
+                    function(data){
+                        console.log(id);
+                        $('#item-'+id).remove();
+                    }
+                );
+
+                swal('".Yii::t('app', 'Deleted!')."', '', 'success');
+            } else {
+                swal('".Yii::t('app', 'Cancelled')."', '', 'error');
+            }
+        });
     });
 ");
 
@@ -156,18 +176,17 @@ foreach ($model as $item) {
 
 <? foreach ($model as $item) : ?>
 
-    <div class="row">
+    <div class="row" id="item-<?= $item->id?>">
         <div class="col-md-12">
             <div class="portlet">
 
                 <div class="portlet-heading bg-inverse">
                     <h3 class="portlet-title"><?= $item->name?></h3>
                         <div class="portlet-widgets">
-                            <a href="javascript:;" data-toggle="reload"><i class="ion-refresh"></i></a>
                             <span class="divider"></span>
                             <a href="#" data-toggle="modal" data-target="#<?= $item->id?>"><i class="md md-create"></i></a>
                             <span class="divider"></span>
-                            <a href="#" data-toggle="remove" data-id="<?= $item->id?>" class="remove"><i class="ion-close-round"></i></a>
+                            <a href="#" data-id="<?= $item->id?>" class="remove"><i class="ion-close-round"></i></a>
                         </div>
                     <div class="clearfix"></div>
                 </div>

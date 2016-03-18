@@ -64,4 +64,10 @@ return [
     'Site' => 'Сайт',
     'Upload' => 'Загрузить',
     'Choose the exercise...' => 'Выбирите упражнение...',
+    'Are you sure?'  => 'Вы уверены?',
+    'Yes, delete it!' => 'Да, удалить!',
+    'No' => 'Нет',
+    'Exercise will be deleted' => 'Упражнение будет навсегда удалено',
+    'Deleted!' => 'Удалено',
+    'Cancelled' => 'Отменено',
 ];

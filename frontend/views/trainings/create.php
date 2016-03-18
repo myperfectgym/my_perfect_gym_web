@@ -37,14 +37,24 @@ $this->registerJsFile('/js/app.create-trainings.js', [
                         ],
                     ]); ?>
 
-                    <?= $form->field($model, 'exercise[]')->widget(Select2::className(),[
-                        'data' => ArrayHelper::map(Exercise::find()->all(), 'id', 'name'),
-                        'options' => ['placeholder' => Yii::t('app', 'Choose the exercise...')],
-                    ])?>
+                    <div id="trainings-selects">
+                        <?= $form->field($model, 'exercise[]')->widget(Select2::className(),[
+                            'data' => ArrayHelper::map(Exercise::find()->all(), 'id', 'name'),
+                            'options' => [
+                                'placeholder' => Yii::t('app', 'Choose the exercise...'),
+                                'class' => 'exercise-create',
+                            ],
+                        ])?>
+                    </div>
 
-                    <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-pink btn-block text-uppercase waves-effect waves-light', 'name' => 'login-button']) ?>
+                    <div class="form-group">
+                        <?= Html::submitButton('Create', ['class' => 'btn btn-primary']) ?>
+                    </div>
 
                     <?php ActiveForm::end(); ?>
+
+                    <?= Html::button('Add new', ['class' => 'btn btn-primary add-new-exercise'])?>
+
                 </div>
             </div>
         </div>

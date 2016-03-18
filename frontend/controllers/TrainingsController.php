@@ -7,6 +7,9 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use kartik\select2\Select2;
+use common\models\Exercise;
+use yii\helpers\ArrayHelper;
 
 
 class TrainingsController extends Controller {
@@ -29,6 +32,7 @@ class TrainingsController extends Controller {
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
+                    //'ajax-exercise-chose' => ['post'],
                 ],
             ],
         ];
@@ -45,6 +49,20 @@ class TrainingsController extends Controller {
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+
+            if ($action->id == 'ajax-exercise-chose') {
+                $this->layout = 'empty';
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function actionIndex()
@@ -66,6 +84,21 @@ class TrainingsController extends Controller {
 
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionAjaxExerciseChose() {
+
+        $id = Yii::$app->request->post('id');
+
+        return Select2::widget([
+            'name' => 'TrainingForm[exercise][]',
+            'data' => ArrayHelper::map(Exercise::find()->all(), 'id', 'name'),
+            'options' => [
+                'placeholder' => Yii::t('app', 'Choose the exercise...'),
+                'class' => 'exercise-create',
+                'id' => 'trainingform-exercise-'.$id,
+            ],
         ]);
     }
 
