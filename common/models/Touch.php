@@ -42,9 +42,9 @@ class Touch extends \yii\db\ActiveRecord
     {
         return [
             'trainings_exercise_id' => 'Trainings Exercise ID',
-            'number' => 'Number',
-            'count' => 'Count',
-            'weight' => 'Weight',
+            'number' => Yii::t('app', 'Number repeat'),
+            'count' => Yii::t('app', 'Count'),
+            'weight' => Yii::t('app', 'Weight'),
         ];
     }
 

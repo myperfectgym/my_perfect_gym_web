@@ -70,4 +70,11 @@ return [
     'Exercise will be deleted' => 'Упражнение будет навсегда удалено',
     'Deleted!' => 'Удалено',
     'Cancelled' => 'Отменено',
+    'Name trainings' => 'Название тренеровки',
+    'Date' => 'Дата',
+    'Number repeat' => 'Количество повторений',
+    'Count' => 'Число раз за подход',
+    'Weight' => 'Вес',
+    'Add touch' => 'Добавить подход',
+    'Number of touch' => 'Номер подхода',
 ];

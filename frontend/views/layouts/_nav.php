@@ -76,8 +76,7 @@ use frontend\models\form\UserForm;
                         <a href="#"><?= Yii::t('app', 'Trainings')?></a>
                         <ul class="submenu">
                             <li><?= Html::a(Yii::t('app', 'List trainings'), ['trainings/'])?>
-                            <li><?= Html::a(Yii::t('app', 'Create training'), ['trainings/create'])?></li>
-                        </ul>
+                         </ul>
                     </li>
                     <li class="has-submenu" >
                         <a href="#" class="dropdown-toggle profile waves-effect" data-toggle="dropdown" aria-expanded="true"><?= Yii::t('app', 'Exercise')?></a>

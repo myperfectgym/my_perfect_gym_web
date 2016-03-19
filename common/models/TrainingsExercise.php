@@ -29,8 +29,8 @@ class TrainingsExercise extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['training_id', 'exercise_id'], 'required'],
-            [['training_id', 'exercise_id'], 'integer']
+            [['trainings_id', 'exercise_id'], 'required'],
+            [['trainings_id', 'exercise_id'], 'integer']
         ];
     }
 
@@ -40,7 +40,7 @@ class TrainingsExercise extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'training_id' => 'Training ID',
+            'trainings_id' => 'Training ID',
             'exercise_id' => 'Exercise ID',
         ];
     }
@@ -59,5 +59,10 @@ class TrainingsExercise extends \yii\db\ActiveRecord
     public function getExercise()
     {
         return $this->hasOne(Exercise::className(), ['id' => 'exercise_id']);
+    }
+
+    public function getTouch()
+    {
+        return $this->hasMany(Touch::className(), ['trainings_exercise_id' => 'id']);
     }
 }

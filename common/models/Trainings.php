@@ -33,6 +33,7 @@ class Trainings extends \yii\db\ActiveRecord
             [['user_id'], 'required'],
             [['user_id'], 'integer'],
             [['description'], 'string'],
+            [['name'], 'string'],
             [['date'], 'safe']
         ];
     }
@@ -45,8 +46,9 @@ class Trainings extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'description' => 'Описание',
-            'date' => 'Дата',
+            'name' => Yii::t('app', 'Name trainings'),
+            'description' => Yii::t('app', 'Description'),
+            'date' => Yii::t('app', 'Date'),
         ];
     }
 
@@ -58,8 +60,8 @@ class Trainings extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
-    public function getExercise()
+    public function getTrainingsExercise()
     {
-        return $this->hasMany(TrainingsExercise::className(), ['trainings_is' => 'id']);
+        return $this->hasMany(TrainingsExercise::className(), ['trainings_id' => 'id']);
     }
 }

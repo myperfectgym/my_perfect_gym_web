@@ -1,38 +1,36 @@
 $(document).ready(function () {
 
-    var id = 1;
+    var content = $('#exercise-touch').html();
 
-    $('.add-new-exercise').on('click', function() {
+    $('#add-touch-button').click(function(){
+        $('#exercise-touch').append(content);
+    });
 
-        $.post(
-            '/trainings/ajax-exercise-chose',
-            {"id": id},
-            function(data) {
+    $('body').on('beforeSubmit', 'form#create-new-exercise-form', function () {
+        var form = $(this);
 
-                $('#trainings-selects').append("<div class='form-group'>" +
-                        "<div class='form-group'>" +
-                            "<label class='col-md-2 control-label'>" +
-                                "<label class='control-label' for='trainingform-exercise-'"+id+">" +
-                                    "Exercise" +
-                                "</label>" +
-                            "</label>"+
-                            "<div class='col-md-10'>"
-                                +data+
-                            "</div>" +
-                        "</div>" +
-                    "</div>");
+        if (form.find('.has-error').length) {
+            return false;
+        }
+        $.post({
+            url: '/trainings/create-new-exercise',
+            data: form.serialize(),
+            success: function (response) {
+                console.log(response);
+                $('.reset').val('');
 
-                if ($('#trainingform-exercise-'+id).data('select2')) {
-                    $('#trainingform-exercise-'+id).select2('destroy');
-                }
+                $('#modal-close').trigger('click');
 
-                $.when($('#trainingform-exercise-'+id).select2(select2_5df7b16d)).done(
-                    initS2Loading('trainingform-exercise-'+id,'s2options_d6851687'
-                    )
-                );
+                $('.touch').each(function(index) {
+                    if (index != 0) {
+                        $(this).remove();
+                    }
+                });
 
-                id++;
+                $('#created-touch').append(response);
+
             }
-        );
-    })
+        });
+        return false;
+    });
 });
