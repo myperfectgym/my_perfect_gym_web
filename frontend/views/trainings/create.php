@@ -38,29 +38,10 @@ $this->registerJsFile('/js/app.create-trainings.js', [
 <div id="created-touch">
     <? foreach($model->trainingsExercise as $item): ?>
 
-        <div class='row'>
-            <div class='portlet'>
-                <div class='portlet-heading bg-inverse'>
-                    <h3 class='portlet-title'>
-                        <?= Html::a($item->exercise->name, ['/exercise/view', 'id' => $item->exercise->id])?>
-                    </h3>
-                    <div class='portlet-widgets'>
-                        <a data-toggle='collapse' data-parent='#accordion1' href='#bg-default'><i class='ion-minus-round'></i></a>
-                        <span class='divider'></span>
-                        <a href='#' data-toggle='remove'><i class='ion-close-round'></i></a>
-                    </div>
-                    <div class='clearfix'></div>
-                </div>
 
-                <div id="bg-default" class="panel-collapse collapse in">
-                    <div class="portlet-body">
 
                         <?= Helper::createHtmlExercise($item)?>
 
-                    </div>
-                </div>
-            </div>
-        </div>
 
     <? endforeach; ?>
 </div>
@@ -81,5 +62,6 @@ $this->registerJsFile('/js/app.create-trainings.js', [
 <?php ActiveForm::end(); ?>
 
 <?= $this->render('_modal-form.php', [
+    'model'       => $model,
     'modelTouch'  => $modelTouch,
 ])?>

@@ -35,8 +35,9 @@ class GroupExerciseForm extends GroupExercise
 
     public function beforeDelete()
     {
-        $this->getImageFile()->delete();
-
+        if ($this->getImageFile()) {
+            $this->getImageFile()->delete();
+        }
         return parent::beforeDelete();
     }
 
