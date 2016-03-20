@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 
 <div class="row">
     <div class="col-lg-12">
-        <div class="text-center">
+        <div class="text-center button-create">
             <?= Html::button(Yii::t('app', 'Create training'), [
                 'class' => 'btn btn-primary btn-rounded waves-effect waves-light',
                 'data-toggle' => 'modal',
@@ -14,6 +14,36 @@ use yii\bootstrap\ActiveForm;
             ])?>
         </div>
     </div>
+</div>
+
+<div class="row">
+    <? foreach ($modelTrainings as $training) : ?>
+
+        <div class="col-lg-6">
+            <div class="portlet">
+                <div class="portlet-heading portlet-default">
+                    <h3 class="portlet-title text-dark">
+                        <?= $training->name?>
+                    </h3>
+                    <div class="portlet-widgets">
+                        <?= Html::a("<i class='glyphicon glyphicon-pencil'></i>", ['/trainings/create', 'id' => $training->id])?>
+                        <span class="divider"></span>
+                        <a data-toggle="collapse" data-parent="#accordion1" href="#bg-default"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <span class="divider"></span>
+                        <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="bg-default" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+                        <?= $training->description?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <? endforeach; ?>
+
 </div>
 
 <div id="create" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

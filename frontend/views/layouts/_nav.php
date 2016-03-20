@@ -10,7 +10,7 @@ use frontend\models\form\UserForm;
 
             <!-- Logo container-->
             <div class="logo">
-                <a href="/" class="logo">My perfect gim</span></a>
+                <span><a href="/" class="logo">My perfect gim</span></a></span>
             </div>
             <!-- End Logo container-->
 

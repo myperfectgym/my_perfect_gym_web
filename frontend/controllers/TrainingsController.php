@@ -71,6 +71,9 @@ class TrainingsController extends Controller {
     public function actionIndex()
     {
         $model = new Trainings();
+        $modelTrainings = Trainings::find()
+            ->where(['user_id' => Yii::$app->user->identity->getId()])
+            ->all();
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -87,6 +90,7 @@ class TrainingsController extends Controller {
 
         return $this->render('index', [
             'model' => $model,
+            'modelTrainings'    => $modelTrainings,
         ]);
     }
 

@@ -31,7 +31,7 @@ $this->registerJsFile('/js/app.create-trainings.js', [
 
 <div class="row">
     <div class="card-box">
-        <h4 class="m-t-0 header-title"><b> создание тренировки </b></h4>
+        <h4 class="m-t-0 header-title"><b> Создание тренировки </b></h4>
     </div>
 </div>
 
@@ -42,7 +42,7 @@ $this->registerJsFile('/js/app.create-trainings.js', [
             <div class='portlet'>
                 <div class='portlet-heading bg-inverse'>
                     <h3 class='portlet-title'>
-                        <?= $item->exercise->name?>
+                        <?= Html::a($item->exercise->name, ['/exercise/view', 'id' => $item->exercise->id])?>
                     </h3>
                     <div class='portlet-widgets'>
                         <a data-toggle='collapse' data-parent='#accordion1' href='#bg-default'><i class='ion-minus-round'></i></a>
@@ -50,52 +50,6 @@ $this->registerJsFile('/js/app.create-trainings.js', [
                         <a href='#' data-toggle='remove'><i class='ion-close-round'></i></a>
                     </div>
                     <div class='clearfix'></div>
-                </div>
-
-                <div class="panel-collapse collapse in">
-
-                    <div class="portlet-body">
-
-                        <div class="col-md-6">
-                            <?= Carousel::widget([
-                                'photos' => $item->exercise->getImageFile(),
-                            ])?>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="p-20">
-                                <div class="m-b-15">
-                                    <h5><?= Yii::t('app', 'Chest')?><span class="pull-right"><?= $item->exercise->chest?>%</span></h5>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-primary wow animated progress-animated" role="progressbar" aria-valuenow="<?= $item->exercise->chest?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $item->exercise->chest?>%;">
-                                            <span class="sr-only"><?= $item->exercise->chest?>% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="m-b-15">
-                                    <h5><?= Yii::t('app', 'Back')?><span class="pull-right"><?= $item->exercise->back?>%</span></h5>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-pink wow animated progress-animated" role="progressbar" aria-valuenow="<?= $item->exercise->back?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $item->exercise->back?>%;">
-                                            <span class="sr-only"><?= $item->exercise->back?>% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="m-b-15">
-                                    <h5><?= Yii::t('app', 'Hips')?><span class="pull-right"><?= $item->exercise->hips?>%</span></h5>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-purple wow animated progress-animated" role="progressbar" aria-valuenow="<?= $item->exercise->hips?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $item->exercise->hips?>%;">
-                                            <span class="sr-only"><?= $item->exercise->hips?>% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?= $item->exercise->description?>
-                        </div>
-
-                    </div>
-
                 </div>
 
                 <div id="bg-default" class="panel-collapse collapse in">
