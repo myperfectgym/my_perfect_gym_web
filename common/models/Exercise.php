@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\form\ExerciseForm;
 use Yii;
 
 /**
@@ -75,5 +76,12 @@ class Exercise extends \yii\db\ActiveRecord
     public function getGroupExercise()
     {
         return $this->hasOne(GroupExercise::className(), ['id' => 'group_id']);
+    }
+
+    public function getImageFile()
+    {
+        return Files::find()
+            ->where(['model_id' => $this->id, 'modelname' => ExerciseForm::className()])
+            ->all();
     }
 }

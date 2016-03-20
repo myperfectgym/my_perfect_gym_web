@@ -19,23 +19,18 @@ class Helper
             $content .= "</tr>";
         }
 
-        return "<div class='row'>
-                    <div class='card-box'>
-                        <h4 class='header-title m-t-0'><b>".$trainingExercise->exercise->name."</b></h4>
-                        <table class='table m-0'>
-                            <thead>
-                                <tr>
-                                    <th>".Yii::t('app', 'Number of touch')."</th>
-                                    <th>".Yii::t('app', 'Number repeat')."</th>
-                                    <th>".Yii::t('app', 'Count')."</th>
-                                    <th>".Yii::t('app', 'Weight')."</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                               ".$content."
-                            </tbody>
-                        </table>
-                    </div>
-                </div>";
+        return "<table class='table m-0'>
+                    <thead>
+                        <tr>
+                            <th>".Yii::t('app', 'Number of touch')."</th>
+                            <th>".Yii::t('app', 'Number repeat')."</th>
+                            <th>".Yii::t('app', 'Count')."</th>
+                            <th>".Yii::t('app', 'Weight')."</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       ".$content."
+                    </tbody>
+                </table>";
     }
 }

@@ -30,7 +30,7 @@ class Trainings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'required'],
+            [['user_id', 'name'], 'required'],
             [['user_id'], 'integer'],
             [['description'], 'string'],
             [['name'], 'string'],

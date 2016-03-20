@@ -2,10 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2;
-use yii\helpers\ArrayHelper;
-use common\models\Exercise;
 use \common\components\Helper;
+use common\widgets\Carousel;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Trainings */
@@ -40,7 +38,75 @@ $this->registerJsFile('/js/app.create-trainings.js', [
 <div id="created-touch">
     <? foreach($model->trainingsExercise as $item): ?>
 
-        <?= Helper::createHtmlExercise($item)?>
+        <div class='row'>
+            <div class='portlet'>
+                <div class='portlet-heading bg-inverse'>
+                    <h3 class='portlet-title'>
+                        <?= $item->exercise->name?>
+                    </h3>
+                    <div class='portlet-widgets'>
+                        <a data-toggle='collapse' data-parent='#accordion1' href='#bg-default'><i class='ion-minus-round'></i></a>
+                        <span class='divider'></span>
+                        <a href='#' data-toggle='remove'><i class='ion-close-round'></i></a>
+                    </div>
+                    <div class='clearfix'></div>
+                </div>
+
+                <div class="panel-collapse collapse in">
+
+                    <div class="portlet-body">
+
+                        <div class="col-md-6">
+                            <?= Carousel::widget([
+                                'photos' => $item->exercise->getImageFile(),
+                            ])?>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="p-20">
+                                <div class="m-b-15">
+                                    <h5><?= Yii::t('app', 'Chest')?><span class="pull-right"><?= $item->exercise->chest?>%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-primary wow animated progress-animated" role="progressbar" aria-valuenow="<?= $item->exercise->chest?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $item->exercise->chest?>%;">
+                                            <span class="sr-only"><?= $item->exercise->chest?>% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="m-b-15">
+                                    <h5><?= Yii::t('app', 'Back')?><span class="pull-right"><?= $item->exercise->back?>%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-pink wow animated progress-animated" role="progressbar" aria-valuenow="<?= $item->exercise->back?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $item->exercise->back?>%;">
+                                            <span class="sr-only"><?= $item->exercise->back?>% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="m-b-15">
+                                    <h5><?= Yii::t('app', 'Hips')?><span class="pull-right"><?= $item->exercise->hips?>%</span></h5>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-purple wow animated progress-animated" role="progressbar" aria-valuenow="<?= $item->exercise->hips?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $item->exercise->hips?>%;">
+                                            <span class="sr-only"><?= $item->exercise->hips?>% Complete</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?= $item->exercise->description?>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div id="bg-default" class="panel-collapse collapse in">
+                    <div class="portlet-body">
+
+                        <?= Helper::createHtmlExercise($item)?>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <? endforeach; ?>
 </div>
@@ -60,86 +126,6 @@ $this->registerJsFile('/js/app.create-trainings.js', [
 
 <?php ActiveForm::end(); ?>
 
-<div id="create-exercise" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel"><?= Yii::t('app', 'Create training')?></h4>
-            </div>
-            <?php $form = ActiveForm::begin([
-                'options' =>
-                    [
-                        'enctype' => 'multipart/form-data',
-                        'id' => 'create-new-exercise-form',
-                    ],
-                'fieldConfig' => [
-                    'template' => "<div class='form-group'>
-                                        {input}
-                                        <div class='col-lg-8'>
-                                            {error}
-                                        </div>
-                                   </div>",
-                ],
-            ]); ?>
-
-            <input type="hidden" name="training_id" value="<?= $model->id?>">
-
-            <div class="modal-body">
-
-                <?= $form->field($modelTouch, 'exercise_id')->widget(Select2::className(),[
-                    'data' => ArrayHelper::map(Exercise::find()->all(), 'id', 'name'),
-                    'options' => [
-                        'placeholder' => Yii::t('app', 'Choose the exercise...'),
-                        'class' => 'reset',
-                    ],
-                ])?>
-
-                <table class="table m-0">
-                    <thead>
-                    <tr>
-                        <th><?= Yii::t('app', 'Number repeat')?></th>
-                        <th><?= Yii::t('app', 'Count')?></th>
-                        <th><?= Yii::t('app', 'Weight')?></th>
-                    </tr>
-                    </thead>
-                    <tbody id="exercise-touch" class="portlet-heading">
-                    <tr class="portlet touch">
-                        <td><?= $form->field($modelTouch, 'number[]')->textInput([
-                                'class' => 'form-control reset'
-                            ])?></td>
-                        <td><?= $form->field($modelTouch, 'count[]')->textInput([
-                                'class' => 'form-control reset'
-                            ])?></td>
-                        <td><?= $form->field($modelTouch, 'weight[]')->textInput([
-                                'class' => 'form-control reset'
-                            ])?></td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th><?= Html::button(Yii::t('app', 'Add touch'), [
-                                'class' => 'btn btn-primary',
-                                'id'    => 'add-touch-button',
-                            ])?></th>
-                    </tr>
-                    </tfoot>
-                </table>
-                </di>
-
-                <div class="modal-footer">
-                    <button type="button" id="modal-close" class="btn btn-default waves-effect" data-dismiss="modal"><?= Yii::t('app', 'Close')?></button>
-                    <?= Html::submitButton(Yii::t('app', 'Create'), [
-                        'class' => 'btn btn-primary',
-                        'id' => 'create-new-exercise',
-                    ]) ?>
-                </div>
-
-                <?php ActiveForm::end(); ?>
-
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div>
-</div>
+<?= $this->render('_modal-form.php', [
+    'modelTouch'  => $modelTouch,
+])?>
