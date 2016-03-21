@@ -52,6 +52,15 @@ class Trainings extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeDelete()
+    {
+        foreach($this->trainingsExercise as $trainings) {
+            $trainings->delete();
+        }
+
+        return parent::beforeDelete();
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

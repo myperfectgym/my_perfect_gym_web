@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace backend\assets;
+namespace frontend\assets;
 
 use yii\web\AssetBundle;
 
@@ -13,19 +13,18 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class SweetAlert extends AssetBundle
+class NotifyAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/sweetalert';
+    public $sourcePath = '@bower/notifyjs';
 
     public $css = [
-        'dist/sweetalert.css'
+        'dist/styles/metro/notify-metro.css',
     ];
     public $js = [
-        'dist/sweetalert.min.js'
+        'dist/notify.js',
+        'dist/styles/metro/notify-metro.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
+        'yii\web\JqueryAsset',
     ];
 }

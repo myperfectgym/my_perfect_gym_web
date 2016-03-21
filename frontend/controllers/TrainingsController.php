@@ -145,5 +145,36 @@ class TrainingsController extends Controller {
             }
         }
     }
+
+    public function actionDelete() {
+
+        $id = Yii::$app->request->post('id');
+
+        $this->findModel($id)->delete();
+    }
+
+    public function actionDeleteTouch() {
+
+        $id = Yii::$app->request->post('id');
+
+        $this->findTouchModel($id)->delete();
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Trainings::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    protected function findTouchModel($id) {
+        if (($model = TrainingsExercise::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }
 ?>

@@ -2,6 +2,18 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+
+/**
+ * @var $this yii\web\View;
+ */
+
+$this->registerJsFile('js/app.index-trainings.js', [
+    'depends' => [
+        'frontend\assets\AppAsset',
+        'frontend\assets\NotifyAsset',
+        'common\assets\SweetAlert'
+    ]
+]);
 ?>
 
 <div class="row">
@@ -19,7 +31,7 @@ use yii\bootstrap\ActiveForm;
 <div class="row">
     <? foreach ($modelTrainings as $training) : ?>
 
-        <div class="col-lg-6">
+        <div class="col-lg-6" id="training-<?= $training->id?>">
             <div class="portlet">
                 <div class="portlet-heading portlet-default">
                     <h3 class="portlet-title text-dark">
@@ -30,7 +42,7 @@ use yii\bootstrap\ActiveForm;
                         <span class="divider"></span>
                         <a data-toggle="collapse" data-parent="#accordion1" href="#bg-default"><i class="glyphicon glyphicon-eye-open"></i></a>
                         <span class="divider"></span>
-                        <a href="#" data-toggle="remove"><i class="ion-close-round"></i></a>
+                        <a href="#" data-id="<?= $training->id?>" class="remove"><i class="ion-close-round"></i></a>
                     </div>
                     <div class="clearfix"></div>
                 </div>

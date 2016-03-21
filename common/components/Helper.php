@@ -21,7 +21,7 @@ class Helper
         }
 
         return "
-        <div class='row'>
+        <div class='row' id='exercise-$trainingExercise->id'>
             <div class='portlet'>
                     <div class='portlet-heading bg-inverse'>
                         <h3 class='portlet-title'>
@@ -30,7 +30,7 @@ class Helper
                         <div class='portlet-widgets'>
                             <a data-toggle='collapse' data-parent='#accordion1' href='#bg-default'><i class='ion-minus-round'></i></a>
                             <span class='divider'></span>
-                            <a href='#' data-toggle='remove'><i class='ion-close-round'></i></a>
+                            <a data-id='$trainingExercise->id' class='remove'><i class='ion-close-round'></i></a>
                         </div>
                         <div class='clearfix'></div>
                     </div>

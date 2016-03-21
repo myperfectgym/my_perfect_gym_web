@@ -24,6 +24,8 @@
         "bower-asset/select2":   "4.0.1",
         "bower-asset/dropzone":   "*",
         "bower-asset/sweetalert":   "*",
+        "bower-asset/notifyjs":   "*",
+        "bower-asset/ladda":   "*",
         "lavrentiev/yii2-toastr": "2.0.0",
         "kartik-v/yii2-widget-activeform": "@dev",
         "kartik-v/yii2-widget-fileinput": "@dev",

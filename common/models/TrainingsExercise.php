@@ -45,6 +45,15 @@ class TrainingsExercise extends \yii\db\ActiveRecord
         ];
     }
 
+    public function beforeDelete()
+    {
+        foreach ($this->touch as $touch) {
+            $touch->delete();
+        }
+
+        return parent::beforeDelete();
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

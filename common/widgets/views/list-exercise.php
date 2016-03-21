@@ -9,7 +9,7 @@ use kartik\form\ActiveForm;
 use kartik\file\FileInput;
 
 $this->registerAssetBundle(backend\assets\DropZoneAsset::className());
-$this->registerAssetBundle(backend\assets\SweetAlert::className());
+$this->registerAssetBundle(common\assets\SweetAlert::className());
 
 $this->registerJs("
     $('.remove-image').click(function(){
@@ -43,7 +43,7 @@ $this->registerJs("
                     '/admin/exercise/delete',
                     {id: id},
                     function(data){
-                        console.log(id);
+
                         $('#item-'+id).remove();
                     }
                 );

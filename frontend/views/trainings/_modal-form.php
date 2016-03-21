@@ -79,6 +79,8 @@ use yii\helpers\Html;
                     <?= Html::submitButton(Yii::t('app', 'Create'), [
                         'class' => 'btn btn-primary',
                         'id' => 'create-new-exercise',
+                        'data-style' => 'contract-overlay',
+                        'data-size' => 'xs',
                     ]) ?>
                 </div>
 

@@ -77,4 +77,5 @@ return [
     'Weight' => 'Вес',
     'Add touch' => 'Добавить подход',
     'Number of touch' => 'Номер подхода',
+    'Add exercise' => 'Добавить упражнение',
 ];
