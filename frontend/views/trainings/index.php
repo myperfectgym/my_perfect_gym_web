@@ -11,7 +11,9 @@ $this->registerJsFile('js/app.index-trainings.js', [
     'depends' => [
         'frontend\assets\AppAsset',
         'frontend\assets\NotifyAsset',
-        'common\assets\SweetAlert'
+        'common\assets\SweetAlert',
+        'common\assets\LaddaAsset',
+        'common\assets\ProgressAsset'
     ]
 ]);
 ?>
@@ -69,6 +71,7 @@ $this->registerJsFile('js/app.index-trainings.js', [
                 'options' =>
                     [
                         'enctype' => 'multipart/form-data',
+                        'id'      => 'create-training-form',
                     ],
                 'fieldConfig' => [
                     'template' => "<div class='form-group'>
@@ -88,7 +91,12 @@ $this->registerJsFile('js/app.index-trainings.js', [
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default waves-effect" data-dismiss="modal"><?= Yii::t('app', 'Close')?></button>
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), [
+                    'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',
+                    'id'    => 'create-new-trainings',
+                    'data-style' => 'contract-overlay',
+                    'data-size' => 'xs'
+                ]) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+    /**
+     * remove exercise
+     * */
     $('.remove').click(function(){
         var id = $(this).data('id');
         swal({
@@ -14,16 +17,18 @@ $(document).ready(function(){
             closeOnCancel: false
         }, function(isConfirm){
             if (isConfirm) {
-
+                progressJs().start().autoIncrease(50, 200);
                 $.post({
                     url: '/trainings/delete',
                     data: {'id': id},
                     success: function(responsive) {
                         swal('Тренеровка удалена', '', 'success');
                         $('#training-'+id).remove();
+                        progressJs().end();
                     },
                     error: function(responsive) {
                         swal('При удалении произошла ошика', '', 'error');
+                        progressJs().end();
                      }
                 });
 
@@ -32,4 +37,24 @@ $(document).ready(function(){
             }
         });
     });
+    /**
+     * end remove
+     * */
+
+    /**
+    * create new trainings
+    * */
+    var l = Ladda.create(document.querySelector('#create-new-trainings'));
+    $('body').on('beforeSubmit', 'form#create-training-form', function () {
+        var form = $(this);
+
+        if (form.find('.has-error').length) {
+            return false;
+        }
+
+        l.start();
+    });
+    /**
+     * end create
+     * */
 });

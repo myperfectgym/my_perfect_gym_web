@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Files;
-use frontend\models\UserForm;
+use frontend\models\form\UserForm;
 use Yii;
 use common\models\User;
 use yii\base\Exception;

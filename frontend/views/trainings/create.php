@@ -13,6 +13,7 @@ $this->registerJsFile('/js/app.create-trainings.js', [
         'yii\web\JqueryAsset',
         'common\assets\LaddaAsset',
         'common\assets\SweetAlert',
+        'common\assets\ProgressAsset',
     ]
 ]);
 ?>
@@ -33,6 +34,7 @@ $this->registerJsFile('/js/app.create-trainings.js', [
 <div class="row">
     <div class="card-box">
         <h4 class="m-t-0 header-title"><b> <?= Yii::t('app', 'Create training')?> </b></h4>
+        <?= $form->field($model, 'description')->textarea()?>
     </div>
 </div>
 

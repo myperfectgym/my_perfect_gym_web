@@ -26,6 +26,8 @@
         "bower-asset/sweetalert":   "*",
         "bower-asset/notifyjs":   "*",
         "bower-asset/ladda":   "*",
+        "bower-asset/progressbar.js":   "*",
+        "bower-asset/progress.js":   "*",
         "lavrentiev/yii2-toastr": "2.0.0",
         "kartik-v/yii2-widget-activeform": "@dev",
         "kartik-v/yii2-widget-fileinput": "@dev",

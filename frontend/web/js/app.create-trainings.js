@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+    /**
+     * create new exercise
+     * */
+
     var content = $('#exercise-touch').html();
     var l = Ladda.create(document.querySelector('#create-new-exercise'));
 
@@ -38,7 +42,15 @@ $(document).ready(function () {
         });
         return false;
     });
+    /**
+     * end create
+     * */
 
+
+
+    /**
+     * remove exercise
+     * */
     $('.remove').click(function(){
         var id = $(this).data('id');
         swal({
@@ -53,16 +65,18 @@ $(document).ready(function () {
             closeOnCancel: false
         }, function(isConfirm){
             if (isConfirm) {
-
+                progressJs().start().autoIncrease(50, 200);
                 $.post({
                     url: '/trainings/delete-touch',
                     data: {'id': id},
                     success: function(responsive) {
                         swal('Упражнение удалено', '', 'success');
                         $('#exercise-'+id).remove();
+                        progressJs().end();
                     },
                     error: function(responsive) {
                         swal('При удалении произошла ошика', '', 'error');
+                        progressJs().end();
                     }
                 });
 
@@ -71,4 +85,7 @@ $(document).ready(function () {
             }
         });
     });
+    /**
+     * end remove
+     * */
 });

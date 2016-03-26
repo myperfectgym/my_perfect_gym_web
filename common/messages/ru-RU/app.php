@@ -25,6 +25,7 @@ return [
     'My Perfect Gim' => 'My Perfect Gim',
     'Remember me' => 'Запомнить',
     'Trainings' => 'Тренеровки',
+    'Training' => 'Тренеровка',
     'List trainings' => 'Список тренеровок',
     'Create training' => 'Создать тренеровку',
     'Exercise' => 'Упражнения',

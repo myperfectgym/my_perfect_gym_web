@@ -12,11 +12,17 @@ class Helper
         $content = "";
         $count = 0;
         foreach ($trainingExercise->touch as $touch) {
-            $content .= "<tr>";
+            $content .= "<tr class='gradeX'>";
             $content .= "<th>".++$count."</th>";
             $content .= "<th>".$touch->number."</th>";
             $content .= "<th>".$touch->count."</th>";
             $content .= "<th>".$touch->weight."</th>";
+//            $content .= "<td class='actions'>
+//                            <a href='#' class=\"hidden on-editing save-row\"><i class=\"fa fa-save\"></i></a>
+//                            <a href='#' class=\"hidden on-editing cancel-row\"><i class=\"fa fa-times\"></i></a>
+//                            <a href='#' class=\"on-default edit-row\"><i class=\"fa fa-pencil\"></i></a>
+//                            <a href='#' class=\"on-default remove-row\"><i class=\"fa fa-trash-o\"></i></a>
+//                         </td>";
             $content .= "</tr>";
         }
 
@@ -28,16 +34,16 @@ class Helper
                             ".Html::a($trainingExercise->exercise->name, ['/exercise/view', 'id' => $trainingExercise->exercise->id])."
                         </h3>
                         <div class='portlet-widgets'>
-                            <a data-toggle='collapse' data-parent='#accordion1' href='#bg-default'><i class='ion-minus-round'></i></a>
+                            <a data-toggle='collapse' data-parent='#accordion1' href='#bg-$trainingExercise->id'><i class='ion-minus-round'></i></a>
                             <span class='divider'></span>
-                            <a data-id='$trainingExercise->id' class='remove'><i class='ion-close-round'></i></a>
+                            <a href='#' data-id='$trainingExercise->id' class='remove'><i class='ion-close-round'></i></a>
                         </div>
                         <div class='clearfix'></div>
                     </div>
 
-                    <div id='bg-default' class='panel-collapse collapse in'>
+                    <div id='bg-$trainingExercise->id' class='panel-collapse collapse in'>
                         <div class='portlet-body'>
-                        <table class='table m-0'>
+                        <table class='table table-striped' id='datatable-editable'>
                             <thead>
                                 <tr>
                                     <th>".Yii::t('app', 'Number of touch')."</th>

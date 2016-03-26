@@ -85,7 +85,7 @@ class TrainingsController extends Controller {
                 throw new Exception();
             }
 
-            return $this->redirect('trainings/create?id='.$model->id);
+            return $this->redirect('/trainings/create?id='.$model->id);
         }
 
         return $this->render('index', [
@@ -99,8 +99,11 @@ class TrainingsController extends Controller {
         $model = TrainingForm::findOne($id);
         $modelTouch = new TouchForm();
 
-        if (Yii::$app->request->isPost) {
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->save();
 
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Training').': '.$model->name. ' успешно создано');
+            return $this->redirect('/trainings/index');
         }
 
         return $this->render('create', [
@@ -126,11 +129,20 @@ class TrainingsController extends Controller {
                 }
 
                 foreach (Yii::$app->request->post('TouchForm')['number'] as $key => $item) {
+
+                    $number = Yii::$app->request->post('TouchForm')['number'][$key];
+                    $count = Yii::$app->request->post('TouchForm')['count'][$key];
+                    $weight = Yii::$app->request->post('TouchForm')['weight'][$key];
+
+                    if (!$number || !$count || !$weight) {
+                        continue;
+                    }
+
                     $modelTouch = new Touch();
                     $modelTouch->trainings_exercise_id = $modelTrainingExercise->id;
-                    $modelTouch->number = Yii::$app->request->post('TouchForm')['number'][$key];
-                    $modelTouch->count = Yii::$app->request->post('TouchForm')['count'][$key];
-                    $modelTouch->weight = Yii::$app->request->post('TouchForm')['weight'][$key];
+                    $modelTouch->number = $number;
+                    $modelTouch->count = $count;
+                    $modelTouch->weight = $weight;
 
                     if (!$modelTouch->save()) {
                         throw new Exception();

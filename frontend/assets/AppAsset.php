@@ -36,6 +36,7 @@ class AppAsset extends AssetBundle
         'js/jquery.slimscroll.js',
         'js/waves.js',
         'js/wow.min.js',
+        'js/jquery.core.js',
         'js/jquery.app.js'
     ];
     public $depends = [

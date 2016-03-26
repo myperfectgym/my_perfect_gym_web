@@ -6,6 +6,7 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
+use lavrentiev\widgets\toastr\NotificationFlash;
 
 AppAsset::register($this);
 ?>
@@ -28,6 +29,26 @@ AppAsset::register($this);
 </head>
 <body class="smallscreen fixed-left">
 <?php $this->beginBody() ?>
+
+<?= NotificationFlash::widget([
+    'options' => [
+        "closeButton" => false,
+        "debug" => false,
+        "newestOnTop" => false,
+        "progressBar" => false,
+        "positionClass" => "toast-top-right",
+        "preventDuplicates" => false,
+        "onclick" => null,
+        "showDuration" => "300",
+        "hideDuration" => "1000",
+        "timeOut" => "5000",
+        "extendedTimeOut" => "1000",
+        "showEasing" => "swing",
+        "hideEasing" => "linear",
+        "showMethod" => "fadeIn",
+        "hideMethod" => "fadeOut"
+    ]
+]) ?>
 
 <div id="wrapper" class="right-bar-enabled forced">
 
