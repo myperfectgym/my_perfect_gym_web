@@ -112,6 +112,10 @@ class TrainingsController extends Controller {
         ]);
     }
 
+    public function actionView() {
+
+    }
+
     public function actionCreateNewExercise() {
 
         $modelTrainingExercise = new TrainingsExercise();
