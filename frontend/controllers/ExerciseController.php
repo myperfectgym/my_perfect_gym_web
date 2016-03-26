@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\form\ExerciseForm;
+use common\models\GroupExercise;
 use Yii;
 use common\models\Exercise;
 use yii\data\ActiveDataProvider;
@@ -33,12 +34,12 @@ class ExerciseController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => ExerciseForm::find(),
-        ]);
+        $models = ExerciseForm::find()->all();
+        $groupExercise = GroupExercise::find()->all();
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'models' => $models,
+            'groupExercise' => $groupExercise,
         ]);
     }
 

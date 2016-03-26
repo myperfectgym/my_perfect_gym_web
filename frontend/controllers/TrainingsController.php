@@ -112,7 +112,7 @@ class TrainingsController extends Controller {
         ]);
     }
 
-    public function actionView() {
+    public function actionView($id) {
 
     }
 

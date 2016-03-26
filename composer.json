@@ -28,6 +28,8 @@
         "bower-asset/ladda":   "*",
         "bower-asset/progressbar.js":   "*",
         "bower-asset/progress.js":   "*",
+        "bower-asset/magnific-popup":   "*",
+        "bower-asset/isotope":   "*",
         "lavrentiev/yii2-toastr": "2.0.0",
         "kartik-v/yii2-widget-activeform": "@dev",
         "kartik-v/yii2-widget-fileinput": "@dev",
