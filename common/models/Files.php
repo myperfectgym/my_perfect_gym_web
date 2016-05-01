@@ -63,17 +63,18 @@ class Files extends \yii\db\ActiveRecord
 
     public function attachModel($model, $file)
     {
+        $modelNameReplace = str_replace('\\', '/',$model::className());
         $this->modelname = $model::className();
 
-        $serverPath = $_SERVER['DOCUMENT_ROOT'] . '/frontend/web/uploads/' . $this->modelname . '/' . $model->id . '/' . $file->baseName . '.' . $file->extension;
-        $dirPath = $_SERVER['DOCUMENT_ROOT'] . '/frontend/web/uploads/' . $this->modelname . '/' . $model->id;
+        $serverPath = $_SERVER['DOCUMENT_ROOT'] . '/frontend/web/uploads/' . $modelNameReplace . '/' . $model->id . '/' . $file->baseName . '.' . $file->extension;
+        $dirPath = $_SERVER['DOCUMENT_ROOT'] . '/frontend/web/uploads/' . $modelNameReplace . '/' . $model->id;
 
         if (!file_exists($dirPath)) {
             mkdir($dirPath, 0777, true);
         }
 
         $file->saveAs($serverPath);
-        $this->path = '/uploads/' . $this->modelname . '/' . $model->id . '/' . $file->baseName . '.' . $file->extension;
+        $this->path = '/uploads/' . $modelNameReplace . '/' . $model->id . '/' . $file->baseName . '.' . $file->extension;
         $this->filename = $file->name;
         $this->model_id  = $model->id;
 

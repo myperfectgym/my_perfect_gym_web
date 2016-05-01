@@ -28,10 +28,23 @@ return [
                     'roles' => ['admin'],
                 ],
                 [
-                    'actions' => ['calendar'],
+                    'actions' => ['index', 'create'],
                     'allow' => true,
                     'roles' => ['user'],
                 ],
+            ],
+        'exercise' =>
+            [
+                [
+                    'actions' => [],
+                    'allow' => true,
+                    'roles' => ['admin'],
+                ],
+                [
+                    'actions' => ['index'],
+                    'allow' => true,
+                    'roles' => ['user']
+                ]
             ],
         'user' =>
             [

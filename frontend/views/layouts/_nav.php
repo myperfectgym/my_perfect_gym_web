@@ -4,7 +4,10 @@ use common\models\Files;
 use frontend\models\form\UserForm;
 ?>
 
+<!--<pre><?/*print_r(Yii::$app->authManager->getRolesByUser(Yii::$app->user->identity->getId()))*/?></pre>
+--><?/*exit*/?>
 <header id="topnav">
+    <?//TODO make admin panel widjet ?>
     <div class="topbar-main">
         <div class="container">
 
@@ -24,29 +27,36 @@ use frontend\models\form\UserForm;
                         </form>
                     </li>
 
-                    <li class="dropdown">
-                        <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true">
-                            <?
-                            $avatar = Files::find()
-                                ->where(
-                                    [
-                                        'model_id' => Yii::$app->user->identity->id,
-                                        'modelname' => UserForm::className(),
-                                    ]
-                                )
-                                ->one();
-                            if ($avatar): ?>
-                                <img src="<?= $avatar->path?>" alt="user-img" class="img-circle">
-                            <? else: ?>
-                                <img src="/images/noavatar.png" alt="user-img" class="img-circle">
-                            <? endif ?>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><?= Html::a(Yii::t('app', 'Profile'), ['user/view', 'id' => Yii::$app->user->identity->id])?></li>
-                            <li><?= Html::a(Yii::t('app', 'Settings'), ['user/update', 'id' => Yii::$app->user->identity->id])?></li>
-                            <li><?= Html::a(Yii::t('app', 'Logout'), ['site/logout', 'id' => Yii::$app->user->identity->id])?></li>
-                        </ul>
-                    </li>
+                    <? if(Yii::$app->user->isGuest): ?>
+
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true">
+                                <?
+                                $avatar = Files::find()
+                                    ->where(
+                                        [
+                                            'model_id' => Yii::$app->user->identity->id,
+                                            'modelname' => UserForm::className(),
+                                        ]
+                                    )
+                                    ->one();
+                                if ($avatar): ?>
+                                    <img src="<?= $avatar->path?>" alt="user-img" class="img-circle">
+                                <? else: ?>
+                                    <img src="/images/noavatar.png" alt="user-img" class="img-circle">
+                                <? endif ?>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><?= Html::a(Yii::t('app', 'List trainings'), ['trainings/'])?>
+                                <li><?= Html::a(Yii::t('app', 'Profile'), ['user/view', 'id' => Yii::$app->user->identity->id])?></li>
+                                <li><?= Html::a(Yii::t('app', 'Settings'), ['user/update', 'id' => Yii::$app->user->identity->id])?></li>
+                                <li><?= Html::a(Yii::t('app', 'Logout'), ['site/logout', 'id' => Yii::$app->user->identity->id])?></li>
+                            </ul>
+                        </li>
+
+                    <? else: ?>
+
+                    <? endif ?>
                 </ul>
 
                 <div class="menu-item">

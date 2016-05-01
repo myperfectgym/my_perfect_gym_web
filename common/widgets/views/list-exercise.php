@@ -54,6 +54,7 @@ $this->registerJs("
             }
         });
     });
+
 ");
 
 foreach ($model as $item) {
